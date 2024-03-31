@@ -1,0 +1,23 @@
+{% load static %}
+
+<script>
+    let seconds = 5;
+    let nextUrl = "{% if request.GET.next_url %}{{ request.GET.next_url }}{% else %}{% url 'home:home' %}{% endif %}";
+
+    function updateTimer() {
+        document.getElementById('timer').innerText = seconds;
+        seconds--;
+
+        if (seconds < 0) {
+            window.location.href = nextUrl;
+        } else {
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    updateTimer();
+</script>
+
+</body>
+
+</html>
