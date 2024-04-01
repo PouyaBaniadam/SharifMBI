@@ -58,16 +58,7 @@
  * License - https://fontawesome.com/license (Commercial License)
  */
 
-* {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
 
-*::-webkit-scrollbar {
-    display: none;
-}
 
 .fa {
     font-family: 'Font Awesome 6 Pro';
@@ -32312,7 +32303,7 @@
 
 /* line 6,   */
 body {
-    background-image: url("../img/bg.svg");
+    background-image: url("../img/bg.webp");
     margin: 0;
     font-family: iranyekan;
     font-size: 1rem;
@@ -50524,7 +50515,7 @@ body {
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url("../img/bg.svg");
+    background-image: url("../img/bg.webp");
     scrollbar-width: none;
     overflow-y: scroll;
 }
