@@ -28,9 +28,9 @@ class Category(models.Model):
 
     slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='اسلاگ')
 
-    icon = models.ImageField(upload_to='News/Category/icons/', verbose_name='آیکون', blank=True, null=True)
+    icon = models.ImageField(upload_to='Weblogs/Category/icons/', verbose_name='آیکون', blank=True, null=True)
 
-    cover_image = models.ImageField(upload_to='News/Category/images', verbose_name='تصویر', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='Weblogs/Category/images', verbose_name='تصویر', blank=True, null=True)
 
     description = CKEditor5Field(config_name="extends", verbose_name='درباره دسته بندی')
 
@@ -62,7 +62,7 @@ class Weblog(models.Model):
 
     ratings = GenericRelation(to=Rating, related_query_name='weblogs')
 
-    cover_image = models.ImageField(upload_to='News/News/cover_images', verbose_name='تصویر کاور')
+    cover_image = models.ImageField(upload_to='Weblogs/Weblogs/cover_images', verbose_name='تصویر کاور')
 
     created_at = jDateTimeField(auto_now_add=True, verbose_name='تاریخ شروع')
 
@@ -89,7 +89,8 @@ class Weblog(models.Model):
 
         return list(set(related_weblogs))[:max_results]  # Ensure related_weblogs is a list before slicing
 
-    def get_latest_weblogs(self):
+    @staticmethod
+    def get_latest_weblogs():
         latest_weblogs = Weblog.objects.all().order_by('-created_at')
 
         return latest_weblogs
