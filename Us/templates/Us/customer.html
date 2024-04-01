@@ -2,11 +2,9 @@
 {% load static %}
 
 {% block content %}
-    {% include 'includes/header.html' %}
-
     <!--main content wrapper start-->
     <div class="main-wrapper">
-
+        {% include 'includes/header.html' %}
         <!--integration details section start-->
         <section class="integration-details ptb-120">
             <div class="container">
@@ -130,9 +128,9 @@
             </div>
         </section>
         <!--cat subscribe end-->
+        {% include 'includes/footer.html' %}
+
     </div>
     <!--main content wrapper ends-->
-
-    {% include 'includes/footer.html' %}
 
 {% endblock %}

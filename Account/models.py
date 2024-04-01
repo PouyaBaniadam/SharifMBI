@@ -52,6 +52,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     company_name = models.CharField(max_length=100, verbose_name="نام شرکت")
 
+    about = models.TextField(verbose_name="درباره", blank=True, null=True)
+
     is_staff = models.BooleanField(default=False, verbose_name='آیا کارمند است؟')
 
     is_active = models.BooleanField(default=True, verbose_name="آیا فعال است؟")

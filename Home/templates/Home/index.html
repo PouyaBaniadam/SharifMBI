@@ -3,10 +3,9 @@
 {% load static %}
 
 {% block content %}
-    {% include 'includes/header.html' %}
-
     <!--main content wrapper start-->
     <div class="main-wrapper">
+        {% include 'includes/header.html' %}
         <!--hero section start-->
         <section class="hero-section ptb-120"
                  style="background: url('{% static 'img/shape/dot-dot-wave-shape.svg' %}')no-repeat bottom center">
@@ -409,10 +408,9 @@
             </div>
         </section>
         <!--cat subscribe end-->
-
+        {% include 'includes/footer.html' %}
     </div>
     <!--main content wrapper end-->
 
-    {% include 'includes/footer.html' %}
 
 {% endblock %}

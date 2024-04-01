@@ -3,18 +3,28 @@ from django.utils.encoding import uri_to_iri
 from django.views.generic import ListView, DetailView
 from hitcount.views import HitCountDetailView
 
-from Weblog.models import Weblog
+from Weblog.models import Weblog, Category
 
 
 class AllWeblogs(ListView):
     model = Weblog
     context_object_name = 'weblogs'
     template_name = 'Weblog/weblog_list.html'
+    paginate_by = 9
 
     def get_queryset(self):
         weblogs = Weblog.objects.select_related('category', 'author').order_by('-created_at')
 
         return weblogs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        categories = Category.objects.all()
+
+        context['categories'] = categories
+
+        return context
 
 
 class WeblogDetail(HitCountDetailView, DetailView):
@@ -30,7 +40,7 @@ class WeblogDetail(HitCountDetailView, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        related_weblogs = self.object.get_related_weblogs(max_results=5)
+        related_weblogs = self.object.get_related_weblogs(max_results=3)
         latest_weblogs = self.object.get_latest_weblogs()
 
         context['related_weblogs'] = related_weblogs

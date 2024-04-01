@@ -56553,3 +56553,10 @@ a.navbar-toggler:focus {
 .no-underline {
     text-decoration:none;
 }
+
+.tag {
+  display: inline-block;  /* Ensures elements appear side-by-side */
+  margin: 5px;           /* Optional spacing between tags */
+  padding: 5px;          /* Optional padding within tags */
+  border: 1px solid #ddd; /* Optional border for visual separation */
+}

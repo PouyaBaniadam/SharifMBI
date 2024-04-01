@@ -24,6 +24,7 @@ urlpatterns = ([
                    path('admin/', admin.site.urls),
                    path("", include("Home.urls")),
                    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
+                   path('ratings/', include('star_ratings.urls', namespace='ratings')),
                    path("account/", include("Account.urls")),
                    path("us/", include("Us.urls")),
                    path("weblog/", include("Weblog.urls")),
