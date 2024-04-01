@@ -3,11 +3,10 @@
 {% load static %}
 
 {% block content %}
-        <!--main content wrapper start-->
+    {% include 'includes/header.html' %}
+
+    <!--main content wrapper start-->
     <div class="main-wrapper">
-
-        {% include 'includes/header.html' %}
-
         <!--hero section start-->
         <section class="hero-section ptb-120"
                  style="background: url('{% static 'img/shape/dot-dot-wave-shape.svg' %}')no-repeat bottom center">
@@ -18,26 +17,6 @@
                             <h1 class="fw-bold display-5">راه حل های قدرتمند برای کسب و کار شما</h1>
                             <p class="lead">به طور مداوم هماهنگی بردارهای کیفیت کیفیت با کیفیت خدمات مشتریان مشتری مرکزی
                                 مرکز خدمات.</p>
-                            <div class="hero-subscribe-form-wrap pt-4 position-relative m-auto m-xl-0 d-none d-md-block d-lg-block d-xl-block">
-                                <form id="subscribe-form" name="email-form"
-                                      class="hero-subscribe-form d-block d-lg-flex d-md-flex">
-                                    <label for="email-address"></label><input type="email" class="form-control me-2"
-                                                                              name="Email" data-name="Email"
-                                                                              placeholder="آدرس ایمیل خود را وارد کنید"
-                                                                              id="email-address" required="">
-                                    <input type="submit" value="اشتراک" data-wait="صبر کنید ..."
-                                           class="btn btn-primary mt-3 mt-lg-0 mt-md-0">
-                                </form>
-                                <ul class="nav subscribe-feature-list mt-3">
-                                    <li class="nav-item">
-                                        <span class="me-0"><i class="far fa-check-circle text-primary me-2"></i>امتحان 14 روزه رایگان</span>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span><i class="far fa-check-circle text-primary me-2"></i>بدون نیاز به کارت اعتباری</span>
-                                    </li>
-                                </ul>
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 mt-4 mt-xl-0">
@@ -77,70 +56,7 @@
         </section>
         <!--hero section end-->
 
-        <!--promo section start-->
-        <section class="promo-section ptb-120 bg-light">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-10 col-lg-6">
-                        <div class="section-heading text-center">
-                            <h2>مشتریان ما نتایج را دریافت می کنند</h2>
-                            <p>به تدریج کاتالیزورهای موقعیت یابی بازار را برای تغییر و از لحاظ فنی به کار می گیرد.
-                                اقتدارگرا با سازگار با عقب
-                                خدمات الکترونیکی</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 mt-4 mt-lg-0 mt-md-0">
-                        <div class="bg-dark p-5 text-center d-flex flex-column h-100 rounded-custom">
-                            <div class="promo-card-info mb-4">
-                                <h3 class="display-5 fw-bold mb-4"><i class="far fa-fingerprint text-warning me-2"></i>
-                                    10x
-                                </h3>
-                                <p>بهترین شیوه های متمایز را پس از داخلی و یا در حالی که لبه
-                                    پیشرفت های فرآیند </p>
-                            </div>
-                            <div class="mt-auto">
-                                <img src="{% static 'img/clients/client-logo-4.svg' %}" width="120" alt="clients"
-                                     class="img-fluid me-auto customer-logo">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mt-4 mt-lg-0 mt-md-0">
-                        <div class="bg-dark p-5 text-center d-flex flex-column h-100 rounded-custom">
-                            <div class="promo-card-info mb-4">
-                                <h3 class="display-5 fw-bold mb-4"><i class="far fa-paper-plane text-warning me-2"></i>
-                                    5k
-                                </h3>
-                                <p>به طرز وحشیانه ای بهترین شیوه های متمایز را در بر میگیرد داخلی یا در حالی که
-                                    پیشرفت های فرآیند </p>
-                            </div>
-                            <div class="mt-auto">
-                                <img src="{% static 'img/clients/client-logo-2.svg' %}" width="120" alt="clients"
-                                     class="img-fluid me-auto customer-logo">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mt-4 mt-lg-0">
-                        <div class="bg-dark p-5 text-center d-flex flex-column h-100 rounded-custom">
-                            <div class="promo-card-info mb-4">
-                                <h3 class="display-5 fw-bold mb-4"><i
-                                        class="far fa-chart-pie-alt text-warning me-2"></i>
-                                    95%</h3>
-                                <p>بهترین شیوه های متمایز پس از سندیکای B2B داخلی یا در حالی که فرآیند خونریزی لبه
-                                    بهبود. </p>
-                            </div>
-                            <div class="mt-auto">
-                                <img src="{% static 'img/clients/client-logo-3.svg' %}" width="120" alt="clients"
-                                     class="img-fluid me-auto customer-logo">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        <!--promo section end-->
+        {% include 'includes/promo_section.html' %}
 
         <!--feature section start-->
         <section class="feature-section-two ptb-120">
@@ -505,7 +421,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="text-lg-end mb-5 mb-lg-0">
-                            <a href="#" class="btn btn-primary"> مشاهده تمام ادغام ها </a>
+                            <a href="{% url 'us:customers' %}" class="btn btn-primary"> مشاهده تمام مشتریان </a>
                         </div>
                     </div>
                 </div>
@@ -513,137 +429,17 @@
                     <div class="col-12">
                         <div class="integration-wrapper position-relative w-100">
                             <ul class="integration-list list-unstyled mb-0">
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/airbnb.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/figma.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/facebook.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/sales-force.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/atlassian.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/dropbox-2.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/dynamic-365.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/erecruiter.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/evernote.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/google-icon.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/slack.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/google-analytics.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/google-drive.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/hubspot.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/instagram.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/linkedin.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/mailchimp.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="single-integration">
-                                        <img src="{% static 'img/integations/marekto.png' %}" alt="integration"
-                                             class="img-fluid">
-                                        <h6 class="mb-0 mt-4">نام برند</h6>
-                                    </div>
-                                </li>
+                                {% for customer in customers %}
+                                    <li>
+                                        <a href="{% url 'us:customer' customer.slug %}" class="no-underline">
+                                            <div class="single-integration">
+                                                <img src="{{ customer.icon.url }}" alt="integration"
+                                                     class="img-fluid">
+                                                <h6 class="mb-0 mt-4 no-underline">{{ customer.name }}</h6>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -695,8 +491,9 @@
         </section>
         <!--cat subscribe end-->
 
-
     </div>
     <!--main content wrapper end-->
+
+    {% include 'includes/footer.html' %}
 
 {% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <!--main content wrapper start-->
+    <div class="main-wrapper">
+
+        <!--integration details section start-->
+        <section class="integration-details ptb-120">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-lg-8 pe-5">
+                        <div class="integration-details-wrap">
+                            <h2> جزئیات {{ customer.name }} </h2>
+
+                            {{ customer.description|safe }}
+
+                            <blockquote
+                                    class="bg-white custom-shadow p-5 mt-5 rounded-custom border-4 border-primary border-top">
+                                <p class="text-muted"><i class="fas fa-quote-left me-2 text-primary"></i> در سراسر جهان
+                                    طرح
+                                    های بلندمدت بالا در سراسر جهان با تجارت الکترونیک متمایز
+                                    زیرساخت های متقاطع رسانه ای به جای اخلاق. به طور قابل اعتماد تجسم روش های آزمون
+                                    متمایز
+                                    بدون پایان دادن به پایان.به طور یکپارچه جوامع متقاطع پلت فرم با بازارهای باطن.به طور
+                                    خلاصه خدمات کسب و کار را از طریق راه حل های قوی استفاده کنید.به طرز وحشیانه ای
+                                    زیرساخت
+                                    های متقابل را به جای معیارهای دقیق ارائه می دهند.
+                                    <i class="fas fa-quote-right ms-2 text-primary"></i>
+                                </p>
+                            </blockquote>
+
+                            {% if customer.image %}
+                                <img src="{{ customer.image.url }}" class="img-fluid mt-4 rounded-custom"
+                                     alt="مشتری عارضه یابی شریف">
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="job-overview-wrap bg-light p-5 sticky-sidebar rounded-custom mt-5 mt-lg-0">
+                            <h5>آیا شما هم می‌خواهید شرکت خود را ارتقا دهید؟</h5>
+                            <a href="#" class="btn btn-primary mt-4">ثبت فرم</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--integration details section end-->
+
+        <!--related integration start-->
+        <section class="related-integration ptb-120 bg-light">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-5 col-md-12">
+                        <div class="section-heading">
+                            <h4 class="h5 text-primary">مشتریات</h4>
+                            <h2>از سایر مشتریان سایت ما دیدن کنید.</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12">
+                        <div class="text-lg-start mb-4 mb-xl-0 mb-lg-0">
+                            <a href="{% url 'us:customers' %}" class="btn btn-primary">مشاهده همه مشتریان</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    {% for customer in customers %}
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{% url 'us:customer' customer.slug %}"
+                               class="position-relative text-decoration-none connected-app-single bg-white border border-2 promo-border-hover bg-white mt-4 mt-xl-0 mt-lg-0 transition-base rounded-custom d-block overflow-hidden p-5">
+                                <div class="position-relative connected-app-content">
+                                    <div class="integration-logo bg-white rounded-circle shadow-lg p-2 d-inline-block">
+                                        <img src="{{ customer.icon.url }}" width="40" alt="integration"
+                                             class="img-fluid">
+                                    </div>
+                                    <h5>{{ customer.name }}</h5>
+                                    <p class="mb-0 text-muted">{{ customer.description|safe|truncatechars:150 }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+        <!--related integration end-->
+
+        <!--cat subscribe start-->
+        <section class="cta-subscribe bg-dark ptb-120 position-relative overflow-hidden">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <div class="subscribe-info-wrap text-center position-relative z-2">
+                            <div class="section-heading">
+                                <h4 class="h5 text-warning">بیایید امتحان کنیم دریافت پشتیبانی رایگان</h4>
+                                <h2> شروع آزمایشی رایگان 14 روزه </h2>
+                                <p>ما می توانیم به شما کمک کنیم تا وب سایت رویای خود را برای درآمد ایجاد کنید.</p>
+                            </div>
+                            <div class="form-block-banner mw-60 m-auto mt-5">
+                                <a href="#" class="btn btn-primary">تماس با ما</a>
+                                <a href="http://www.youtube.com/watch?v=hAP2QF--2Dg"
+                                   class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0">
+                                    <i class="fas fa-play"></i> تماشای نسخه ی نمایشی </a>
+                            </div>
+                            <ul class="nav justify-content-center subscribe-feature-list mt-4">
+                                <li class="nav-item">
+                                    <span><i
+                                            class="far fa-check-circle text-primary me-2"></i>امتحان 14 روزه رایگان</span>
+                                </li>
+                                <li class="nav-item">
+                                <span><i
+                                        class="far fa-check-circle text-primary me-2"></i>بدون نیاز به کارت اعتباری</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span><i class="far fa-check-circle text-primary me-2"></i> پشتیبانی 24/7</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span><i class="far fa-check-circle text-primary me-2"></i>حذف در هر زمان</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-circle rounded-circle circle-shape-3 position-absolute bg-dark-light right-5"></div>
+                <div class="bg-circle rounded-circle circle-shape-1 position-absolute bg-warning left-5"></div>
+            </div>
+        </section>
+        <!--cat subscribe end-->
+    </div>
+    <!--main content wrapper ends-->
+
+    {% include 'includes/footer.html' %}
+
+{% endblock %}

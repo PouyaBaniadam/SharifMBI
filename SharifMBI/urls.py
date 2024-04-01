@@ -14,11 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", include("Home.urls")),
-    path("account/", include("Account.urls")),
-]
+from SharifMBI import settings
+
+urlpatterns = ([
+                   path('admin/', admin.site.urls),
+                   path("", include("Home.urls")),
+                   path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
+                   path("account/", include("Account.urls")),
+                   path("us/", include("Us.urls")),
+                   path("weblog/", include("Weblog.urls")),
+                   path("news/", include("News.urls")),
+               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

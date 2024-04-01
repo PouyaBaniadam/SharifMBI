@@ -59,7 +59,6 @@
  */
 
 
-
 .fa {
     font-family: 'Font Awesome 6 Pro';
     font-family: var(--fa-style-family, "Font Awesome 6 Pro");
@@ -56533,6 +56532,6 @@ a.navbar-toggler:focus {
     }
 }
 
-.text-red-500 {
-    color: red;
+.no-underline {
+    text-decoration:none;
 }

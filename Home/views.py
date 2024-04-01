@@ -1,5 +1,6 @@
-from django.db.models import Q
 from django.views.generic import TemplateView
+
+from Us.models import Customer
 
 
 class HomeView(TemplateView):
@@ -8,8 +9,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
 
+        customers = Customer.objects.all()
+
+        context['customers'] = customers
+
         return context
-
-
-class TempInfo(TemplateView):
-    template_name = "Home/temp_info.html"

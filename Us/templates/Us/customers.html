@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <!--main content wrapper start-->
+    <div class="main-wrapper">
+
+        <!--page header section start-->
+        <section class="page-header position-relative overflow-hidden ptb-120 bg-dark"
+                 style="background: url('assets/img/page-header-bg.svg')no-repeat bottom right">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <h1 class="display-5 fw-bold">لیست مشتریان سایت عارضه یابی شریف</h1>
+                        <p class="lead">با مطالعه وضعیت مشتریان ما، با دید بیشتری اقدام به عارضه یابی شرکت خود کنید.</p>
+                    </div>
+                </div>
+                <div class="bg-circle rounded-circle circle-shape-3 position-absolute bg-dark-light left-5"></div>
+            </div>
+        </section>
+        <!--page header section end-->
+
+        <!--integration section start-->
+        <section class="our-integration ptb-120 bg-light">
+            <div class="container">
+                <div class="position-relative w-100">
+                    <div class="row">
+
+                        {% for customer in customers %}
+                            <div class="col-lg-4 col-md-6">
+                                <a href="{% url 'us:customer' customer.slug %}"
+                                   class="position-relative text-decoration-none connected-app-single bg-white border border-2 bg-white mt-4 transition-base rounded-custom d-block overflow-hidden p-5">
+                                    <div class="position-relative connected-app-content">
+                                        <div class="integration-logo bg-white rounded-circle p-2 d-inline-block">
+                                            <img src="{{ customer.icon.url }}" width="40" alt="integration"
+                                                 class="img-fluid">
+                                        </div>
+                                        <h5>{{ customer.name }}</h5>
+                                        <p class="mb-0 text-muted">{{ customer.description|safe|truncatechars:150 }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--integration section end-->
+
+        {% include 'includes/promo_section.html' %}
+
+    </div>
+    <!--main content wrapper end-->
+
+    {% include 'includes/footer.html' %}
+
+{% endblock %}
