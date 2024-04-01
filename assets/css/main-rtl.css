@@ -52,6 +52,24 @@
     src: url("../fonts/2-IranYekan/iranyekanwebbold.eot?#iefix") format("embedded-opentype"), url("../fonts/2-IranYekan/iranyekanwebbold.woff2") format("woff2"), url("../fonts/2-IranYekan/iranyekanwebbold.woff") format("woff"), url("../fonts/2-IranYekan/iranyekanwebbold.ttf") format("truetype");
 }
 
+ /* custom scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #004E4F;
+    border-radius: 10px;
+  }
+
 
 /*!
  * Font Awesome Pro 6.0.0-alpha2 by @fontawesome - https://fontawesome.com
