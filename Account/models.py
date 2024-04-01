@@ -1,31 +1,27 @@
 from uuid import uuid4
 
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 from django_jalali.db.models import jDateTimeField
 
-from Account.validators import validate_email
-
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, mobile_phone, username=None, email=None, password=None, **extra_fields):
+    def create_user(self, mobile_phone, email=None, password=None, **extra_fields):
         if not mobile_phone:
             raise ValueError("شماره تلفن الزامی است.")
 
-        if not username:
-            raise ValueError("نام کاربری الزامی است.")
-
-        user = self.model(mobile_phone=self.normalize_phone(mobile_phone), username=username,
+        user = self.model(mobile_phone=self.normalize_phone(mobile_phone),
                           email=self.normalize_email(email) if email else None, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, mobile_phone, username, email=None, password=None, **extra_fields):
+    def create_superuser(self, mobile_phone, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -34,49 +30,42 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError("None")
 
-        return self.create_user(mobile_phone, username, email, password, **extra_fields)
+        return self.create_user(mobile_phone, email, password, **extra_fields)
 
     def normalize_phone(self, mobile_phone):
         return ''.join(filter(str.isdigit, mobile_phone))
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=75, unique=True, verbose_name='نام کاربری')
+    username = models.CharField(max_length=75, unique=True, verbose_name='نام کاربری', blank=True, null=True)
 
-    slug = models.SlugField(unique=True, verbose_name='اسلاگ')
+    slug = models.SlugField(unique=True, verbose_name='اسلاگ', blank=True, null=True)
 
-    mobile_phone = models.CharField(max_length=11, unique=True, verbose_name='شمارع تلفن')
+    mobile_phone = models.CharField(max_length=11, unique=True, verbose_name='شماره تلفن')
 
-    authentication_token = models.UUIDField(unique=True, default=uuid4, verbose_name="یو یو آی دی")
-
-    email = models.EmailField(max_length=254, unique=True, validators=[validate_email], blank=True, null=True,
+    email = models.EmailField(max_length=254, unique=True, blank=True, null=True,
                               verbose_name='آدرس ایمیل')
 
     full_name = models.CharField(max_length=100, verbose_name="نام و نام خانوادگی")
 
-    about_me = models.TextField(blank=True, null=True, verbose_name='درباره من')
-
     image = models.ImageField(upload_to='Account/Users/profiles/', verbose_name="تصویر پروفایل", blank=True, null=True)
+
+    company_name = models.CharField(max_length=100, verbose_name="نام شرکت")
 
     is_staff = models.BooleanField(default=False, verbose_name='آیا کارمند است؟')
 
     is_active = models.BooleanField(default=True, verbose_name="آیا فعال است؟")
 
-    date_joined = jDateTimeField(auto_now_add=True, editable=False, verbose_name='تاریخ پیوستن')
+    date_joined = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='تاریخ پیوستن')
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['mobile_phone']
+    USERNAME_FIELD = 'mobile_phone'
+
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.username
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        self.slug = slugify(self.username)
-        self.username = self.username.lower()
+        return self.mobile_phone
 
     class Meta:
         verbose_name = "کاربر"
@@ -98,7 +87,13 @@ class OTP(models.Model):
 
     password = models.CharField(max_length=100, verbose_name='رمز عبور')
 
+    full_name = models.CharField(max_length=100, verbose_name="نام و نام خانوادگی")
+
+    company_name = models.CharField(max_length=100, verbose_name="نام شرکت")
+
     sms_code = models.CharField(max_length=4, verbose_name='کد تایید')
+
+    uuid = models.UUIDField(editable=False)
 
     authentication_token = models.UUIDField(blank=True, null=True, verbose_name="یو یو آی دی")
 

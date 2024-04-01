@@ -1,31 +1,33 @@
 import random
 from uuid import uuid4
 
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic import FormView, TemplateView, UpdateView, ListView
+from django.views.generic import FormView
 
-from Account.forms import OTPRegisterForm, CheckOTPForm, RegularLogin, ForgetPasswordForm, ChangePasswordForm
-from Account.mixins import NonAuthenticatedUsersOnlyMixin, AuthenticatedUsersOnlyMixin
-from Account.models import CustomUser, OTP, Notification
-from Home.sms import send_register_sms, send_forget_password_sms
+from Account.forms import RegisterForm, CheckOTPForm, LogInForm, ForgetPasswordForm, ChangePasswordForm
+from Account.mixins import NonAuthenticatedUsersOnlyMixin
+from Account.models import CustomUser, OTP
+from Home.sms import send_forget_password_sms
 
 
 class OTPRegisterView(FormView):
     template_name = "Account/register.html"
-    form_class = OTPRegisterForm
+    form_class = RegisterForm
 
     def form_valid(self, form):
         sms_code = random.randint(a=1000, b=9999)
         mobile_phone = form.cleaned_data.get('mobile_phone')
-        username = form.cleaned_data.get('username')
+        full_name = form.cleaned_data.get('full_name')
+        company_name = form.cleaned_data.get('company_name')
         password = form.cleaned_data.get('password')
         uuid = str(uuid4())
 
-        OTP.objects.create(mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid, username=username,
-                           password=password, otp_type="R")
+        OTP.objects.create(mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid, full_name=full_name,
+                           password=password, company_name=company_name, otp_type="R")
 
         # send_register_sms(receptor=mobile_phone, sms_code=sms_code)
         print(sms_code)
@@ -37,37 +39,33 @@ class OTPRegisterView(FormView):
 
 
 class LogInView(NonAuthenticatedUsersOnlyMixin, FormView):
-    form_class = RegularLogin
+    form_class = LogInForm
     template_name = 'Account/login.html'
 
     def form_valid(self, form):
         request = self.request
-        mobile_phone_or_username = form.cleaned_data.get('mobile_phone_or_username')
+        mobile_phone = form.cleaned_data.get('mobile_phone')
         password = form.cleaned_data.get('password')
 
-        if mobile_phone_or_username.isdigit():
-            user = CustomUser.objects.get(mobile_phone=mobile_phone_or_username)
+        user = CustomUser.objects.get(mobile_phone=mobile_phone)
 
-        else:
-            user = CustomUser.objects.get(username=mobile_phone_or_username)
-
-        username = user.username
-
-        authenticated_user = authenticate(request=request, username=username, password=password)
+        authenticated_user = authenticate(request=request, mobile_phone=mobile_phone, password=password)
 
         if authenticated_user is not None:
             login(request=request, user=user)
 
         else:
-            form.add_error(field="mobile_phone_or_username", error="هیچ حساب کاربری با این مشخصات یافت نشد.")
+            form.add_error(field="mobile_phone", error="هیچ حساب کاربری با این مشخصات یافت نشد.")
 
             return self.form_invalid(form)
 
-        return redirect(reverse("account:profile", kwargs={"slug": request.user.username}))
+        messages.success(request=request, message=f"{user.full_name} عزیز، خوش آمدید. ")
+
+        return redirect(reverse("home:home"))
 
     def get_success_url(self):
         referring_url = self.request.session.pop(key="referring_url", default=None)
-        return referring_url or reverse_lazy("account:profile")
+        return referring_url or reverse_lazy("home:home")
 
 
 class LogOutView(View):
@@ -76,14 +74,20 @@ class LogOutView(View):
         next_url = request.GET.get("next")
 
         if next_url is not None:
+            messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
             return redirect(next_url)
 
         else:
             try:
+                messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
+
                 home_url = reverse('home:home')
 
                 return redirect(home_url)
+
             except:
+                messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
+
                 return redirect(to="home:home")
 
 
@@ -108,13 +112,9 @@ class ChangePasswordView(NonAuthenticatedUsersOnlyMixin, FormView):
 
         otp.delete()
 
-        redirect_url = reverse("home:temp_info")
-        message = "رمز عبور با موفقیت تغییر یافت."
-        success = "yes"
-        failure = "no"
-        next_url = reverse('account:profile')
-        return redirect(
-            redirect_url + f'?message={message}&success={success}&failure={failure}&next_url={next_url}')
+        messages.success(request=request, message=f"رمز عبور با موفقیت تغییر یافت.")
+
+        return redirect(reverse('home:home'))
 
     def form_invalid(self, form):
         return super().form_invalid(form)
@@ -125,24 +125,21 @@ class ForgetPasswordView(NonAuthenticatedUsersOnlyMixin, FormView):
     template_name = "Account/forget_password.html"
 
     def form_valid(self, form):
-        mobile_phone_or_username = form.cleaned_data.get('mobile_phone_or_username')
+        mobile_phone = form.cleaned_data.get('mobile_phone')
 
-        if str(mobile_phone_or_username).isdigit():
-            user = CustomUser.objects.get(mobile_phone=mobile_phone_or_username)
-
-        else:
-            user = CustomUser.objects.get(username=mobile_phone_or_username)
+        user = CustomUser.objects.get(mobile_phone=mobile_phone)
 
         mobile_phone = user.mobile_phone
-        username = user.username
 
         sms_code = random.randint(a=1000, b=9999)
         uuid = str(uuid4())
 
-        OTP.objects.create(username=username, mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid,
+        OTP.objects.create(mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid,
                            otp_type="F")
 
-        send_forget_password_sms(receptor=mobile_phone, sms_code=sms_code)
+        # send_forget_password_sms(receptor=mobile_phone, sms_code=sms_code)
+
+        print(sms_code)
 
         return redirect(reverse(viewname="account:check_otp") + f"?uuid={uuid}&mobile_phone={mobile_phone}")
 
@@ -169,6 +166,7 @@ class CheckOTPView(FormView):
             user = CustomUser.objects.create_user(mobile_phone=mobile_phone, username=username)
 
             user.set_password(password)
+            user.full_name = otp.full_name
             user.save()
 
             login(request=request, user=user)
@@ -176,7 +174,9 @@ class CheckOTPView(FormView):
             otp = OTP.objects.get(uuid=uuid)
             otp.delete()
 
-            return redirect(to="account:profile")
+            messages.success(request=request, message=f"{user.full_name} عزیز. حساب شما با موفقیت ساخته شد.")
+
+            return redirect(to="home:home")
 
         elif OTP.objects.filter(uuid=uuid, sms_code=sms_code, otp_type="F").exists():
 
@@ -200,33 +200,3 @@ class CheckOTPView(FormView):
 
     def form_invalid(self, form):
         return super().form_invalid(form)
-
-
-class ProfileDetailView(AuthenticatedUsersOnlyMixin, TemplateView):
-    template_name = 'Account/profile.html'
-
-
-class ProfileEditView(AuthenticatedUsersOnlyMixin, UpdateView):
-    model = CustomUser
-    template_name = 'Account/edit_profile.html'
-    fields = ("full_name", "email", "about_me")
-    slug_field = "slug"
-    slug_url_kwarg = "slug"
-    success_url = "/"
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('account:profile', kwargs={'slug': self.request.user.username})
-
-
-class NotificationListView(ListView):
-    model = Notification
-    template_name = "Account/notifications.html"
-    context_object_name = "notifications"
-
-    def get_queryset(self):
-        user = self.request.user
-
-        return Notification.objects.filter(users=user).order_by("-created_at")

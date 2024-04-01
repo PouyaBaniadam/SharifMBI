@@ -5,7 +5,7 @@ from Account.models import CustomUser, OTP, Notification
 
 
 class CustomUserAdmin(UserAdmin):
-    list_display = ('mobile_phone', 'username', 'is_staff', 'is_superuser', 'authentication_token', 'date_joined')
+    list_display = ('mobile_phone', 'username', 'is_staff', 'is_superuser', 'date_joined')
 
     list_editable = ('is_staff', 'is_superuser',)
 
@@ -32,9 +32,6 @@ admin.site.register(CustomUser, CustomUserAdmin)
 @admin.register(OTP)
 class OTPAdmin(admin.ModelAdmin):
     list_display = ("username", "mobile_phone", "password", "sms_code", "otp_type")
-
-
-
 
 
 @admin.register(Notification)

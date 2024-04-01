@@ -124,6 +124,24 @@ def validate_full_name_handler(full_name):
     return {"has_errors": has_errors, "message": message, "code": code}
 
 
+def validate_company_name_handler(company_name):
+    has_errors = False
+    message = None
+    code = None
+
+    if len(company_name) < 3:
+        has_errors = True
+        message = "نام شرکت باید حداقل 3 حرف داشته باشد."
+        code = "length_is_low"
+
+    elif company_name.isnumeric():
+        has_errors = True
+        message = "نام شرکت باید حداقل دارای یک حرف باشد."
+        code = "at_least_one_letter"
+
+    return {"has_errors": has_errors, "message": message, "code": code}
+
+
 def validate_email_handler(email):
     has_errors = False
     message = None

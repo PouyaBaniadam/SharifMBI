@@ -3,16 +3,16 @@ from django.core.exceptions import ValidationError
 
 from Account.models import CustomUser
 from Account.validator_utilities import validate_mobile_phone_handler, validate_username_handler, \
-    validate_passwords_handler
+    validate_passwords_handler, validate_full_name_handler, validate_company_name_handler
 
 
-class OTPRegisterForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label="رمز عبور")
     password_repeat = forms.CharField(widget=forms.PasswordInput, label="تکرار رمز عبور")
 
     class Meta:
         model = CustomUser
-        fields = ("username", "mobile_phone", "password", "password_repeat")
+        fields = ("mobile_phone", "full_name", "company_name", "password", "password_repeat")
 
     def clean_mobile_phone(self):
         mobile_phone = self.cleaned_data.get("mobile_phone")
@@ -26,17 +26,29 @@ class OTPRegisterForm(forms.ModelForm):
         else:
             return mobile_phone
 
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
+    def clean_full_name(self):
+        full_name = self.cleaned_data.get("full_name")
 
-        has_errors = validate_username_handler(username=username).get("has_errors")
-        message = validate_username_handler(username=username).get("message")
-        code = validate_username_handler(username=username).get("code")
+        has_errors = validate_full_name_handler(full_name=full_name).get("has_errors")
+        message = validate_full_name_handler(full_name=full_name).get("message")
+        code = validate_full_name_handler(full_name=full_name).get("code")
 
         if has_errors:
             raise ValidationError(message=message, code=code)
         else:
-            return username
+            return full_name
+
+    def clean_company_name(self):
+        company_name = self.cleaned_data.get("company_name")
+
+        has_errors = validate_company_name_handler(company_name=company_name).get("has_errors")
+        message = validate_company_name_handler(company_name=company_name).get("message")
+        code = validate_company_name_handler(company_name=company_name).get("code")
+
+        if has_errors:
+            raise ValidationError(message=message, code=code)
+        else:
+            return company_name
 
     def clean(self):
         cleaned_data = super().clean()
@@ -52,46 +64,22 @@ class OTPRegisterForm(forms.ModelForm):
             raise ValidationError(message=message, code=code)
 
 
-class RegularLogin(forms.Form):
-    mobile_phone_or_username = forms.CharField(max_length=75, widget=forms.TextInput(),
-                                               label="شماره تفلن یا نام کاربری")
-    password = forms.CharField(
-        widget=forms.PasswordInput(), label="رمز عبور")
+class LogInForm(forms.Form):
+    mobile_phone = forms.CharField(max_length=75, label="شماره تفلن")
+    password = forms.CharField(widget=forms.PasswordInput(), label="رمز عبور")
 
     def clean(self):
-        mobile_phone_or_username = self.cleaned_data.get("mobile_phone_or_username")
-
-        mobile_phone = username = None
-
-        if mobile_phone_or_username.isdigit():
-            mobile_phone = mobile_phone_or_username
-            field_name = "mobile_phone"
-
-        else:
-            username = mobile_phone_or_username
-            field_name = "username"
+        mobile_phone = self.cleaned_data.get("mobile_phone")
 
         try:
-            if field_name == "mobile_phone":
-                CustomUser.objects.get(mobile_phone=mobile_phone_or_username)
+            CustomUser.objects.get(mobile_phone=mobile_phone)
 
-                has_errors = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                           mobile_phone_exists_importance=False).get("has_errors")
-                message = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                        mobile_phone_exists_importance=False).get("message")
-                code = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                     mobile_phone_exists_importance=False).get("code")
-
-            else:
-                CustomUser.objects.get(username=mobile_phone_or_username)
-
-                has_errors = validate_username_handler(username=username, username_exists_importance=False).get(
-                    "has_errors")
-
-                message = validate_username_handler(username=username, username_exists_importance=False).get("message")
-
-                code = validate_username_handler(username=username, username_exists_importance=False).get("code")
-
+            has_errors = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                       mobile_phone_exists_importance=False).get("has_errors")
+            message = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                    mobile_phone_exists_importance=False).get("message")
+            code = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                 mobile_phone_exists_importance=False).get("code")
             if has_errors:
                 raise ValidationError(message=message, code=code)
 
@@ -108,43 +96,20 @@ class CheckOTPForm(forms.Form):
 
 
 class ForgetPasswordForm(forms.Form):
-    mobile_phone_or_username = forms.CharField(max_length=75, widget=forms.TextInput(),
-                                               label="شماره تلفن یا نام کاربری")
+    mobile_phone = forms.CharField(max_length=75, label="شماره تلفن")
 
     def clean(self):
-        mobile_phone_or_username = self.cleaned_data.get("mobile_phone_or_username")
-
-        mobile_phone = username = None
-
-        if mobile_phone_or_username.isdigit():
-            mobile_phone = mobile_phone_or_username
-            field_name = "mobile_phone"
-
-        else:
-            username = mobile_phone_or_username
-            field_name = "username"
+        mobile_phone = self.cleaned_data.get("mobile_phone")
 
         try:
-            if mobile_phone:
-                CustomUser.objects.get(mobile_phone=mobile_phone_or_username)
+            CustomUser.objects.get(mobile_phone=mobile_phone)
 
-                has_errors = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                           mobile_phone_exists_importance=False).get("has_errors")
-                message = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                        mobile_phone_exists_importance=False).get("message")
-                code = validate_mobile_phone_handler(mobile_phone=mobile_phone,
-                                                     mobile_phone_exists_importance=False).get("code")
-
-            else:
-                CustomUser.objects.get(username=mobile_phone_or_username)
-
-                has_errors = validate_username_handler(username=username, username_exists_importance=False).get(
-                    "has_errors")
-
-                message = validate_username_handler(username=username, username_exists_importance=False).get("message")
-
-                code = validate_username_handler(username=username, username_exists_importance=False).get("code")
-
+            has_errors = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                       mobile_phone_exists_importance=False).get("has_errors")
+            message = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                    mobile_phone_exists_importance=False).get("message")
+            code = validate_mobile_phone_handler(mobile_phone=mobile_phone,
+                                                 mobile_phone_exists_importance=False).get("code")
             if has_errors:
                 raise ValidationError(message=message, code=code)
 

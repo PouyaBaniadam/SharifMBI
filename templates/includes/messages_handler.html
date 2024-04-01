@@ -1,0 +1,13 @@
+{% for message in messages %}
+    {% if message %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    text: "{{ message }}",
+                    icon: "{{ message.tags }}",
+                    timer: 4000
+                });
+            });
+        </script>
+    {% endif %}
+{% endfor %}
