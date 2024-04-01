@@ -56,7 +56,39 @@
         </section>
         <!--hero section end-->
 
-        {% include 'includes/promo_section.html' %}
+        <!--promo section start-->
+        <section class="promo-section ptb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6">
+                        <div class="section-heading text-center">
+                            <h2>نتایج کسب شده توسط مشتریان عارضه یابی شریف</h2>
+                            <p>هدف عارضه یابی شریف این است که در کوتاه‌ترین بازه زمانی ممکن، تیم و شرکت شما را ارتقا
+                                ببخشد و کسب و کارتان را رونق دهد.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    {% for what_do_customers_earn in what_do_customers_earn %}
+                        <div class="col-md-6 col-lg-4 mt-4 mb-10 mt-lg-0 mt-md-0">
+                            <div class="bg-dark p-5 text-center d-flex flex-column h-100 rounded-custom">
+                                <div class="promo-card-info mb-4">
+                                    <p>{{ what_do_customers_earn.description }}</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <img src="{{ what_do_customers_earn.icon.url }}" width="50" alt="clients"
+                                         class="img-fluid me-auto">
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+        <!--promo section end-->
 
         <!--feature section start-->
         <section class="feature-section-two ptb-120">
@@ -253,8 +285,8 @@
                 <div class="row justify-content-center align-content-center">
                     <div class="col-md-10 col-lg-6">
                         <div class="section-heading text-center">
-                            <h4 class="h5 text-warning">توصیفات</h4>
-                            <h2>آنجه درباره ما میگویند</h2>
+                            <h4 class="h5 text-warning">هم‌تیمی‌ها</h4>
+                            <h2>اعضای تیم عارضه یابی شریف</h2>
                             <p> منحصر به فرد ترویج بردارهای با کیفیت انطباق به جای بازارهای الکترونیکی مستقل معماری های
                                 جایگزین در حالی که تکرار می شود. </p>
                         </div>
@@ -265,137 +297,24 @@
                         <div class="position-relative w-100">
                             <div class="swiper-container testimonialSwiper">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
-                                        <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
-                                             width="100"
-                                             class="img-fluid position-absolute right-0 top-0 z--1 p-3">
-                                        <div class="d-flex mb-32 align-items-center">
-                                            <img src="{% static 'img/testimonial/1.jpg' %}"
-                                                 class="img-fluid me-3 rounded"
-                                                 width="60" alt="user">
-                                            <div class="author-info">
-                                                <h6 class="mb-0">جناب راپون اوبری</h6>
-                                                <small>موسس و مدیر آمارا در هربز</small>
+
+                                    {% for team_member in team_members %}
+                                        <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
+                                            <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
+                                                 width="100"
+                                                 class="img-fluid position-absolute right-0 top-0 z--1 p-3">
+                                            <div class="d-flex mb-32 align-items-center">
+                                                <img src="{{ team_member.image.url }}"
+                                                     class="img-fluid me-3 rounded"
+                                                     width="60" alt="user">
+                                                <div class="author-info">
+                                                    <h6 class="mb-0">{{ team_member.name }}</h6>
+                                                    <small>{{ team_member.about }}</small>
+                                                </div>
                                             </div>
                                         </div>
-                                        <blockquote>
-                                            <h6>بهترین قالبی که میتوانید داشته باشید</h6>
-                                            در سراسر جهان طرح های بلندمدت بالا در سراسر جهان با تجارت الکترونیک متمایز
-                                            زیرساخت های متقاطع رسانه ای به جای اخلاق
-                                        </blockquote>
-                                        <ul class="review-rate mb-0 mt-2 list-unstyled list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
-                                        <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
-                                             width="100"
-                                             class="img-fluid position-absolute right-0 top-0 z--1 p-3">
-                                        <div class="d-flex mb-32 align-items-center">
-                                            <img src="{% static 'img/testimonial/3.jpg' %}"
-                                                 class="img-fluid me-3 rounded"
-                                                 width="60" alt="user">
-                                            <div class="author-info">
-                                                <h6 class="mb-0">اوبری آر</h6>
-                                                <small>مدیر هربز</small>
-                                            </div>
-                                        </div>
-                                        <blockquote>
-                                            <h6>اولین ورژن شگفت انگیز بود</h6>
-                                            به طور پویا توانایی های هسته ای نوآورانه را با بهترین موثر ایجاد می کند
-                                            اقدامات ترویج زیرساخت های نوآورانه.
-                                        </blockquote>
-                                        <ul class="review-rate mb-0 mt-2 list-unstyled list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
-                                        <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
-                                             width="100"
-                                             class="img-fluid position-absolute right-0 top-0 z--1 p-3">
-                                        <div class="d-flex mb-32 align-items-center">
-                                            <img src="{% static 'img/testimonial/2.jpg' %}"
-                                                 class="img-fluid me-3 rounded"
-                                                 width="60" alt="user">
-                                            <div class="author-info">
-                                                <h6 class="mb-0">جناب راپون اوبری</h6>
-                                                <small>موسس و مدیر</small>
-                                            </div>
-                                        </div>
-                                        <blockquote>
-                                            <h6>قالب کیوتی عالی است</h6>
-                                            مذاکره مناسب طاقچه های تعاملی به جای موضوع راهبردی موازی ، مناطق پیوند کل
-                                            برتر
-                                            را انکوباتور می کند.
-                                        </blockquote>
-                                        <ul class="review-rate mb-0 mt-2 list-unstyled list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
-                                        <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
-                                             width="100"
-                                             class="img-fluid position-absolute right-0 top-0 z--1 p-3">
-                                        <div class="d-flex mb-32 align-items-center">
-                                            <img src="{% static 'img/testimonial/4.jpg' %}"
-                                                 class="img-fluid me-3 rounded"
-                                                 width="60" alt="user">
-                                            <div class="author-info">
-                                                <h6 class="mb-0">جان دانی</h6>
-                                                <small>موسس و مدیر </small>
-                                            </div>
-                                        </div>
-                                        <blockquote>
-                                            <h6>بهترین قالب برای ساس</h6>
-                                            به طور پویا توانایی های هسته ای نوآورانه را با بهترین موثر ایجاد می کند
-                                            اقدامات ترویج زیرساخت های نوآورانه.
-                                        </blockquote>
-                                        <ul class="review-rate mb-0 mt-2 list-unstyled list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="swiper-slide bg-custom-light text-white p-5 rounded-custom position-relative">
-                                        <img src="{% static 'img/testimonial/quotes-dot.svg' %}" alt="quotes"
-                                             width="100"
-                                             class="img-fluid position-absolute right-0 top-0 z--1 p-3">
-                                        <div class="d-flex mb-32 align-items-center">
-                                            <img src="{% static 'img/testimonial/5.jpg' %}"
-                                                 class="img-fluid me-3 rounded"
-                                                 width="60" alt="user">
-                                            <div class="author-info">
-                                                <h6 class="mb-0">رانو موندیل</h6>
-                                                <small>لید دولوپر</small>
-                                            </div>
-                                        </div>
-                                        <blockquote>
-                                            <h6> بدون شک خوب است! </h6>
-                                            به سرعت بازارهای الکترونیکی مشتری مدار و فرآیندهای قابل نگهداری را مهندسی
-                                            کنید
-                                        </blockquote>
-                                        <ul class="review-rate mb-0 mt-2 list-unstyled list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
-                                        </ul>
-                                    </div>
+                                    {% endfor %}
+
                                 </div>
                             </div>
                             <span class="swiper-button-next"></span>

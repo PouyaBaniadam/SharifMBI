@@ -101,6 +101,32 @@ class AboutUs(models.Model):
         verbose_name_plural = 'درباره ما'
 
 
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100, verbose_name='نام')
+
+    role = models.CharField(max_length=100, verbose_name='نقش')
+
+    about = models.TextField(max_length=250, verbose_name='درباره')
+
+    image = models.ImageField(upload_to="Us/TeamMembers/images")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class WhatDoCustomersEarn(models.Model):
+    title = models.CharField(max_length=100, verbose_name='تیتر')
+
+    description = models.TextField(max_length=250, verbose_name='توضیحات')
+
+    icon = models.ImageField(upload_to="Us/WhatDoCustomersEarns/icons", verbose_name="آیکون")
+
+    class Meta:
+        db_table = 'us__what_do_customers_earn'
+        verbose_name = 'مشتریان چه نتیجه‌ای دریافت می‌کنند؟'
+        verbose_name_plural = 'مشتریان چه نتایجی را دریافت می‌کنند؟'
+
+
 class Service(models.Model):
     pass
 
