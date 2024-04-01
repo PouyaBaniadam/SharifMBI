@@ -58,6 +58,7 @@ class WeblogsByCategory(ListView):
     model = Weblog
     context_object_name = 'weblogs'
     template_name = 'Weblog/weblogs_by_category.html'
+    paginate_by = 9
 
     def get_queryset(self):
         slug = uri_to_iri(self.kwargs.get('slug'))
@@ -65,3 +66,13 @@ class WeblogsByCategory(ListView):
         weblogs = get_list_or_404(Weblog, category__slug=slug)
 
         return weblogs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        slug = self.kwargs.get('slug')
+        category = Category.objects.get(slug=slug)
+
+        context['category'] = category
+
+        return context

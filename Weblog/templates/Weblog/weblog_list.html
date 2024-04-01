@@ -84,34 +84,35 @@
                 </div>
 
                 <div class="row justify-content-center align-items-center mt-5">
-    <div class="col-auto my-1">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-soft-primary btn-sm">قبلي</a>
-        {% else %}
-            <a href="#" class="btn btn-soft-primary btn-sm disabled">قبلي</a>
-        {% endif %}
-    </div>
-    <div class="col-auto my-1">
-        <nav>
-            <ul class="pagination rounded mb-0">
-                {% for i in paginator.page_range %}
-                    {% if page_obj.number == i %}
-                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
-                    {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
-    </div>
-    <div class="col-auto my-1">
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-soft-primary btn-sm">بعدي</a>
-        {% else %}
-            <a href="#" class="btn btn-soft-primary btn-sm disabled">بعدي</a>
-        {% endif %}
-    </div>
-</div>
+                    <div class="col-auto my-1">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-soft-primary btn-sm">قبلي</a>
+                        {% else %}
+                            <a href="#" class="btn btn-soft-primary btn-sm disabled">قبلي</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-auto my-1">
+                        <nav>
+                            <ul class="pagination rounded mb-0">
+                                {% for i in paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto my-1">
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-soft-primary btn-sm">بعدي</a>
+                        {% else %}
+                            <a href="#" class="btn btn-soft-primary btn-sm disabled">بعدي</a>
+                        {% endif %}
+                    </div>
+                </div>
 
             </div>
         </section>
