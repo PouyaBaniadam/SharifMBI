@@ -37,7 +37,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=75, unique=True, verbose_name='نام کاربری', blank=True, null=True)
+    username = models.CharField(max_length=75, unique=True, verbose_name='نام کاربری')
 
     slug = models.SlugField(unique=True, verbose_name='اسلاگ', blank=True, null=True)
 
@@ -67,7 +67,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.mobile_phone
+        return self.username
 
     class Meta:
         verbose_name = "کاربر"

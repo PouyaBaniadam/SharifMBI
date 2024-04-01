@@ -115,6 +115,8 @@ CKEDITOR_5_CONFIGS = {
 }
 
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,8 +133,12 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "Us.apps.UsConfig",
     "News.apps.NewsConfig",
-    "Weblog.apps.WeblogConfig"
+    "Weblog.apps.WeblogConfig",
+    "Diagnose.apps.DiagnoseConfig"
 ]
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -142,6 +148,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'SharifMBI.urls'
@@ -158,6 +165,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'utils.context_processors.social_media',
             ],
         },
     },
@@ -196,7 +204,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ("en", "English"),
+    ("fa", "فارسی"),
+    # more than one language is expected here
+)
+
+LANGUAGE_CODE = 'fa'
+
+USE_I18N = True
 
 TIME_ZONE = 'UTC'
 

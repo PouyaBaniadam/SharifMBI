@@ -31,12 +31,10 @@ class Contact(FormView):
         return kwargs
 
     def form_valid(self, form):
-        user = CustomUser.objects.get(username=self.request.user.username)
-        print(user.mobile_phone)
-
         message = form.cleaned_data.get("message")
 
-        if user.is_authenticated:
+        if self.request.user.is_authenticated:
+            user = CustomUser.objects.get(username=self.request.user.username)
             mobile_phone = form.cleaned_data.get("mobile_phone", user.mobile_phone)
             email = form.cleaned_data.get("email", user.email)
             full_name = form.cleaned_data.get("full_name", user.full_name)
@@ -64,11 +62,12 @@ class Contact(FormView):
             email = form.cleaned_data.get("email")
             full_name = form.cleaned_data.get("full_name")
 
-            form.instance.user = user
             form.instance.mobile_phone = mobile_phone
             form.instance.email = email
             form.instance.full_name = full_name
             form.instance.message = message
+
+            form.save()
 
         messages.success(self.request, "پیام شما با موقیت ثبت شد.")
 

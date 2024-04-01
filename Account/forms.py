@@ -12,7 +12,21 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ("mobile_phone", "full_name", "company_name", "password", "password_repeat")
+        fields = ("username", "mobile_phone", "full_name", "company_name", "password", "password_repeat")
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+
+        print(username)
+
+        has_errors = validate_username_handler(username=username).get("has_errors")
+        message = validate_username_handler(username=username).get("message")
+        code = validate_username_handler(username=username).get("code")
+
+        if has_errors:
+            raise ValidationError(message=message, code=code)
+        else:
+            return username
 
     def clean_mobile_phone(self):
         mobile_phone = self.cleaned_data.get("mobile_phone")

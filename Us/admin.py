@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Us.models import AboutUs, SocialMedia, Message, Customer, TeamMember, WhatDoCustomersEarn
+from Us.models import AboutUs, SocialMedia, Message, Customer, TeamMember, WhatDoCustomersEarn, ModasOperandi
 
 
 @admin.register(Message)
@@ -32,4 +32,9 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 @admin.register(WhatDoCustomersEarn)
 class WhatDoCustomersEarnAdmin(admin.ModelAdmin):
+    list_display = ("title",)
+
+
+@admin.register(ModasOperandi)
+class ModasOperandiAdmin(admin.ModelAdmin):
     list_display = ("title",)

@@ -14,7 +14,7 @@ class Message(models.Model):
 
     full_name = models.CharField(max_length=100, blank=True, null=True)
 
-    message = CKEditor5Field(config_name='extends')
+    message = models.TextField()
 
     created_at = jDateTimeField(auto_now_add=True)
 
@@ -113,6 +113,11 @@ class TeamMember(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta:
+        db_table = 'us__team_member'
+        verbose_name = 'عضو تیم'
+        verbose_name_plural = 'اعضای تیم'
+
 
 class WhatDoCustomersEarn(models.Model):
     title = models.CharField(max_length=100, verbose_name='تیتر')
@@ -151,3 +156,19 @@ class Customer(models.Model):
         db_table = 'us__customer'
         verbose_name = 'مشتری'
         verbose_name_plural = 'مشتریان'
+
+
+class ModasOperandi(models.Model):
+    title = models.CharField(max_length=100, verbose_name='تیتر')
+
+    description = models.TextField(verbose_name='توضیحات')
+
+    icon = models.ImageField(upload_to="Us/ModasOperandi/icons", verbose_name="آیکون")
+
+    def __str__(self):
+        return f"{self.title}"
+
+    class Meta:
+        db_table = 'us__modas_operandi'
+        verbose_name = 'روال کار'
+        verbose_name_plural = 'روال‌های کار'

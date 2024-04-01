@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                     <li><a href="{% url 'home:home' %}" class="nav-link">خانه</a></li>
-                    <li><a href="{% url 'home:home' %}" class="nav-link">فرم عارضه یابی</a></li>
+                    <li><a href="{% url 'diagnose:form' %}" class="nav-link">فرم عارضه یابی</a></li>
                     <li><a href="{% url 'weblog:all' %}" class="nav-link">وبلاگ‌ها</a></li>
                     <li><a href="{% url 'news:all' %}" class="nav-link">اخبار</a></li>
-
+                    <li><a href="{% url 'us:contact' %}" class="nav-link">ارتباط با ما</a></li>
                 </ul>
             </div>
 
@@ -48,9 +48,10 @@
                 <div class="offcanvas-body">
                     <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                         <li><a href="{% url 'home:home' %}" class="nav-link">خانه</a></li>
-                        <li><a href="{% url 'home:home' %}" class="nav-link">فرم عارضه یابی</a></li>
+                        <li><a href="{% url 'diagnose:form' %}" class="nav-link">فرم عارضه یابی</a></li>
                         <li><a href="{% url 'weblog:all' %}" class="nav-link">وبلاگ‌ها</a></li>
                         <li><a href="{% url 'news:all' %}" class="nav-link">اخبار</a></li>
+                        <li><a href="{% url 'us:contact' %}" class="nav-link">ارتباط با ما</a></li>
                     </ul>
 
                     {% if request.user.is_authenticated %}

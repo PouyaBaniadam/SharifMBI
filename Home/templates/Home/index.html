@@ -207,9 +207,7 @@
                     <div class="col-lg-6 col-md-10">
                         <div class="section-heading text-center">
                             <h4 class="h5 text-primary">پروسه</h4>
-                            <h2> ما فرایند کار ما را دنبال می کنیم </h2>
-                            <p>با مشتاقانه مهارت های رهبری رسانه های متقابل را برای تجربیات جایگزین درگیر می کند.
-                                فعالانه سیستم های عمودی را نسبت به معماری های بصری درایو می کنند.</p>
+                            <h2>در این بخش، روال کار عارضه یابی شریف را قدم به قدم خواهیم دید. </h2>
                         </div>
                     </div>
                 </div>
@@ -222,55 +220,20 @@
                     </div>
                     <div class="col-lg-6 col-md-12 order-0 order-lg-1">
                         <ul class="work-process-list list-unstyled">
-                            <li class="d-flex align-items-start mb-4">
-                                <div class="process-icon-2 border border-2 rounded-custom bg-white me-4 mt-2">
-                                    <i class="far fa-folder-tree fa-2x"></i>
-                                </div>
-                                <div class="icon-content">
-                                    <span class="text-primary h6">مرحله 1</span>
-                                    <h3 class="h5 mb-2">برنامه ریزی تحقیق و محتوا</h3>
-                                    <p>به تدریج سیستم های گسترده ای را تقویت می کنند در حالیکه سهام سرمایه گذاری شده است
-                                        پهنای باند وب، پهنای باند پایه نصب شده است.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-start mb-4">
-                                <div class="process-icon-2 border border-2 rounded-custom bg-white me-4 mt-2">
-                                    <i class="far fa-bezier-curve fa-2x"></i>
-                                </div>
-                                <div class="icon-content">
-                                    <span class="text-primary h6">مرحله 2</span>
-                                    <h3 class="h5 mb-2">انتشار و اجرا</h3>
-                                    <p>به طور چشمگیری مدیران پیشرفته را بدون خطا در سطح جهانی آزاد می کند
-                                        هماهنگی استاندارد شده توزیع شده توزیع شده است.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-start mb-4">
-                                <div class="process-icon-2 border border-2 rounded-custom bg-white me-4 mt-2">
-                                    <i class="far fa-layer-group fa-2x"></i>
-                                </div>
-                                <div class="icon-content">
-                                    <span class="text-primary h6">مرحله 3</span>
-                                    <h3 class="h5 mb-2">پروتوتایپ محصول</h3>
-                                    <p>روش های تست شفاف شفاف به صورت تعاملی
-                                        ابتکارات مهارت های مدیریت را مدیریت می کند.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-start mb-4 mb-lg-0">
-                                <div class="process-icon-2 border border-2 rounded-custom bg-white me-4 mt-2">
-                                    <i class="far fa-truck fa-2x"></i>
-                                </div>
-                                <div class="icon-content">
-                                    <span class="text-primary h6">مرحله 4</span>
-                                    <h3 class="h5 mb-2">تحویل محصول نهایی</h3>
-                                    <p>به طرز چشمگیری معیارهای پیشرونده توزیع شده را بدون خطا در سطح جهانی ساده پخش می
-                                        کند
-                                        هماهنگی استاندارد شده.
-                                    </p>
-                                </div>
-                            </li>
+
+                            {% for modas_operandi in modas_operandies %}
+                                <li class="d-flex align-items-start mb-4">
+                                    <div class="process-icon-2 border border-2 rounded-custom bg-white me-4 mt-2">
+                                        <i class="far fa-folder-tree fa-2x"></i>
+                                    </div>
+                                    <div class="icon-content">
+                                        <span class="text-primary h6">مرحله {{ forloop.counter }}</span>
+                                        <h3 class="h5 mb-2">{{ modas_operandi.title }}</h3>
+                                        <p>{{ modas_operandi.description }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
                         </ul>
                     </div>
                 </div>
@@ -366,48 +329,8 @@
         </section>
         <!--integration section end-->
 
+        {% include 'includes/subscription.html' %}
 
-        <!--cat subscribe start-->
-        <section class="cta-subscribe bg-dark ptb-120 position-relative overflow-hidden">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-10">
-                        <div class="subscribe-info-wrap text-center position-relative z-2">
-                            <div class="section-heading">
-                                <h4 class="h5 text-warning">بیایید امتحان کنیم دریافت پشتیبانی رایگان</h4>
-                                <h2> شروع آزمایشی رایگان 14 روزه </h2>
-                                <p>ما می توانیم به شما کمک کنیم تا وب سایت رویای خود را برای درآمد ایجاد کنید.</p>
-                            </div>
-                            <div class="form-block-banner mw-60 m-auto mt-5">
-                                <a href="#" class="btn btn-primary">تماس با ما</a>
-                                <a href="#"
-                                   class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0">
-                                    <i class="fas fa-play"></i> تماشای نسخه ی نمایشی </a>
-                            </div>
-                            <ul class="nav justify-content-center subscribe-feature-list mt-4">
-                                <li class="nav-item">
-                                    <span><i
-                                            class="far fa-check-circle text-primary me-2"></i>امتحان 14 روزه رایگان</span>
-                                </li>
-                                <li class="nav-item">
-                                <span><i
-                                        class="far fa-check-circle text-primary me-2"></i>بدون نیاز به کارت اعتباری</span>
-                                </li>
-                                <li class="nav-item">
-                                    <span><i class="far fa-check-circle text-primary me-2"></i> پشتیبانی 24/7</span>
-                                </li>
-                                <li class="nav-item">
-                                    <span><i class="far fa-check-circle text-primary me-2"></i>حذف در هر زمان</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-circle rounded-circle circle-shape-3 position-absolute bg-dark-light right-5"></div>
-                <div class="bg-circle rounded-circle circle-shape-1 position-absolute bg-warning left-5"></div>
-            </div>
-        </section>
-        <!--cat subscribe end-->
         {% include 'includes/footer.html' %}
     </div>
     <!--main content wrapper end-->

@@ -23,11 +23,12 @@ class OTPRegisterView(FormView):
         mobile_phone = form.cleaned_data.get('mobile_phone')
         full_name = form.cleaned_data.get('full_name')
         company_name = form.cleaned_data.get('company_name')
+        username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         uuid = str(uuid4())
 
-        OTP.objects.create(mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid, full_name=full_name,
-                           password=password, company_name=company_name, otp_type="R")
+        OTP.objects.create(username=username, mobile_phone=mobile_phone, sms_code=sms_code, uuid=uuid,
+                           full_name=full_name, password=password, company_name=company_name, otp_type="R")
 
         # send_register_sms(receptor=mobile_phone, sms_code=sms_code)
         print(sms_code)
