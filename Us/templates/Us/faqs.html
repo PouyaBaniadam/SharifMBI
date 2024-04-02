@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--main content wrapper start-->
+    <div class="main-wrapper">
+        <!--page header section start-->
+
+        {% include 'includes/header.html' %}
+
+        <section class="page-header position-relative overflow-hidden ptb-120 bg-dark"
+                 style="background: url('assets/img/page-header-bg.svg')no-repeat bottom right">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold">سوالات اخیر</h1>
+                            <p class="lead">در این بخش، برخی از سوالات متداولی که مشتریان از ما دارند را پاسخ دادیم تا
+                                با خیال راحت با روال کار ما آشنا شوید.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-circle rounded-circle circle-shape-3 position-absolute bg-dark-light left-5"></div>
+            </div>
+        </section>
+        <!--page header section end-->
+
+
+        <!--support content section start-->
+        <section class="support-content ptb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-md-8">
+                        <div class="tab-content" id="v-pills-supportContent">
+                            <div class="tab-pane fade show active" id="support-tab-1" role="tabpanel">
+                                <div class="support-article-wrap">
+                                    <h2>سوالات متوادل عارضه یابی شریف</h2>
+                                    <ul class="support-article-list list-unstyled mt-4">
+
+                                        {% for faq in faqs %}
+                                            <li class="py-4 border-top border-light">
+                                                <a href="{% url 'us:faq' faq.slug %}"
+                                                   class="text-decoration-none d-block text-muted">
+                                                    <h3 class="h5 support-article-title">{{ faq.question }}</h3>
+                                                    <p>{{ faq.answer|safe|truncatechars:150 }}</p>
+                                                    <span class="btn-link text-decoration-none read-more-link">ادامه مطلب<i
+                                                            class="far fa-arrow-left ms-2"></i></span>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--support content section end-->
+
+        {% include 'includes/footer.html' %}
+
+    </div>
+    <!--main content wrapper end-->
+{% endblock %}

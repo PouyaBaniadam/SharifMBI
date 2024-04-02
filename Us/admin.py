@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Us.models import AboutUs, SocialMedia, Message, Customer, TeamMember, WhatDoCustomersEarn, ModasOperandi
+from Us.models import AboutUs, SocialMedia, Message, Customer, TeamMember, WhatDoCustomersEarn, ModasOperandi, Faq
 
 
 @admin.register(Message)
@@ -38,3 +38,10 @@ class WhatDoCustomersEarnAdmin(admin.ModelAdmin):
 @admin.register(ModasOperandi)
 class ModasOperandiAdmin(admin.ModelAdmin):
     list_display = ("title",)
+
+
+@admin.register(Faq)
+class FaqAdmin(admin.ModelAdmin):
+    list_display = ("question",)
+
+    prepopulated_fields = {"slug": ("question",)}

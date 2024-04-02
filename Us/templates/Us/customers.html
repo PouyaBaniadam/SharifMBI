@@ -34,8 +34,13 @@
                                    class="position-relative text-decoration-none connected-app-single bg-white border border-2 bg-white mt-4 transition-base rounded-custom d-block overflow-hidden p-5">
                                     <div class="position-relative connected-app-content">
                                         <div class="integration-logo bg-white rounded-circle p-2 d-inline-block">
-                                            <img src="{{ customer.icon.url }}" width="40" alt="integration"
-                                                 class="img-fluid">
+                                            {% if customer.icon %}
+                                                <img src="{{ customer.icon.url }}" width="40" alt="integration"
+                                                     class="img-fluid">
+                                            {% else %}
+                                                <img src="{% static 'img/no_icon.png' %}" width="40" alt="integration"
+                                                     class="img-fluid">
+                                            {% endif %}
                                         </div>
                                         <h5>{{ customer.name }}</h5>
                                         <p class="mb-0 text-muted">{{ customer.description|safe|truncatechars:150 }}</p>

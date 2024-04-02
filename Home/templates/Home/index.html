@@ -314,8 +314,13 @@
                                     <li>
                                         <a href="{% url 'us:customer' customer.slug %}" class="no-underline">
                                             <div class="single-integration">
-                                                <img src="{{ customer.icon.url }}" alt="integration"
-                                                     class="img-fluid">
+                                                {% if customer.icon %}
+                                                    <img src="{{ customer.icon.url }}" alt="integration"
+                                                         class="img-fluid">
+                                                {% else %}
+                                                    <img src="{% static 'img/no_icon.png' %}" alt="integration"
+                                                         class="img-fluid">
+                                                {% endif %}
                                                 <h6 class="mb-0 mt-4 no-underline">{{ customer.name }}</h6>
                                             </div>
                                         </a>

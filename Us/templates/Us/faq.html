@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--main content wrapper start-->
+    <div class="main-wrapper">
+
+        {% include 'includes/header.html' %}
+
+        <!--support content section start-->
+        <section class="support-content ptb-120">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-lg-8 col-md-8 p-lg-5">
+                        <div class="support-article-wrap">
+                            <h1 class="display-5 mb-4 fw-bold">{{ faq.question }}</h1>
+                            {{ faq.answer|safe }}
+                        </div>
+                    </div>
+                    {% include 'includes/side_bar_ad.html' %}
+
+                </div>
+            </div>
+        </section>
+        <!--support content section end-->
+
+        {% include 'includes/footer.html' %}
+
+    </div>
+    <!--main content wrapper end-->
+{% endblock %}

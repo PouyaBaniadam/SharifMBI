@@ -22,6 +22,7 @@
                     <li><a href="{% url 'weblog:all' %}" class="nav-link">وبلاگ‌ها</a></li>
                     <li><a href="{% url 'news:all' %}" class="nav-link">اخبار</a></li>
                     <li><a href="{% url 'us:contact' %}" class="nav-link">ارتباط با ما</a></li>
+                    <li><a href="{% url 'us:faqs' %}" class="nav-link">سوالات اخیر</a></li>
                 </ul>
             </div>
 
@@ -52,6 +53,8 @@
                         <li><a href="{% url 'weblog:all' %}" class="nav-link">وبلاگ‌ها</a></li>
                         <li><a href="{% url 'news:all' %}" class="nav-link">اخبار</a></li>
                         <li><a href="{% url 'us:contact' %}" class="nav-link">ارتباط با ما</a></li>
+                        <li><a href="{% url 'us:faqs' %}" class="nav-link">سوالات اخیر</a></li>
+
                     </ul>
 
                     {% if request.user.is_authenticated %}

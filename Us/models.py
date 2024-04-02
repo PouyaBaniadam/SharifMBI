@@ -172,3 +172,19 @@ class ModasOperandi(models.Model):
         db_table = 'us__modas_operandi'
         verbose_name = 'روال کار'
         verbose_name_plural = 'روال‌های کار'
+
+
+class Faq(models.Model):
+    question = models.CharField(max_length=150, verbose_name='سوال')
+
+    answer = CKEditor5Field(config_name='extends', verbose_name='جواب')
+
+    slug = models.SlugField(allow_unicode=True, max_length=150)
+
+    def __str__(self):
+        return f"{self.question}"
+
+    class Meta:
+        db_table = 'us__faq'
+        verbose_name = 'سوال اخیر'
+        verbose_name_plural = 'سوالات اخیر'

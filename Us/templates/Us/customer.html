@@ -13,6 +13,11 @@
                         <div class="integration-details-wrap">
                             <h2> جزئیات {{ customer.name }} </h2>
 
+                            {% if customer.image %}
+                                <img src="{{ customer.image.url }}" class="img-fluid mt-4 rounded-custom"
+                                     alt="مشتری عارضه یابی شریف">
+                            {% endif %}
+
                             {{ customer.description|safe }}
 
                             <blockquote
@@ -29,20 +34,9 @@
                                     <i class="fas fa-quote-right ms-2 text-primary"></i>
                                 </p>
                             </blockquote>
-
-                            {% if customer.image %}
-                                <img src="{{ customer.image.url }}" class="img-fluid mt-4 rounded-custom"
-                                     alt="مشتری عارضه یابی شریف">
-                            {% endif %}
-
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="job-overview-wrap bg-light p-5 sticky-sidebar rounded-custom mt-5 mt-lg-0">
-                            <h5>آیا شما هم می‌خواهید شرکت خود را ارتقا دهید؟</h5>
-                            <a href="#" class="btn btn-primary mt-4">ثبت فرم</a>
-                        </div>
-                    </div>
+                    {% include 'includes/side_bar_ad.html' %}
                 </div>
             </div>
         </section>

@@ -1,10 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
+from django.utils.encoding import uri_to_iri
 from django.views.generic import TemplateView, FormView, ListView, DetailView
 
 from Account.models import CustomUser
 from Us.forms import ContactForm
-from Us.models import AboutUs, Customer
+from Us.models import AboutUs, Customer, Faq
 
 
 class About(TemplateView):
@@ -95,3 +96,20 @@ class CustomerDetail(DetailView):
         context['customers'] = customers
 
         return context
+
+
+class FaqList(ListView):
+    model = Faq
+    context_object_name = "faqs"
+    template_name = "Us/faqs.html"
+
+
+class FaqDetail(DetailView):
+    model = Faq
+    context_object_name = "faq"
+    template_name = "Us/faq.html"
+
+    def get_object(self, queryset=None):
+        slug = uri_to_iri(self.kwargs.get(self.slug_url_kwarg))
+        queryset = self.get_queryset()
+        return get_object_or_404(queryset, **{self.slug_field: slug})
