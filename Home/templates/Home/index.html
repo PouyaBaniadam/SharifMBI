@@ -21,18 +21,24 @@
                     <div class="col-xl-6 col-lg-6 mt-4 mt-xl-0">
                         <div class="hero-img-wrap position-relative">
                             <!--animated shape start-->
-                            <ul class="position-absolute animate-element parallax-element shape-service hide-medium">
+                            <ul class="position-absolute animate-element shape-service hide-medium">
                                 <li class="layer" data-depth="0.03">
                                     <img src="{% static 'img/color-shape/image-1.svg' %}" alt="shape"
-                                         class="img-fluid position-absolute color-shape-1">
+                                         class="img-fluid position-absolute color-shape-1" style="
+                                         z-index: -1;
+                                     ">
                                 </li>
                                 <li class="layer" data-depth="0.02">
                                     <img src="{% static 'img/color-shape/feature-2.svg' %}" alt="shape"
-                                         class="img-fluid position-absolute color-shape-2 z-5">
+                                         class="img-fluid position-absolute color-shape-2 z-5" style="
+                                         z-index: -1;
+                                     ">
                                 </li>
                                 <li class="layer" data-depth="0.03">
                                     <img src="{% static "img/color-shape/feature-3.svg" %}" alt="shape"
-                                         class="img-fluid position-absolute color-shape-3">
+                                         class="img-fluid position-absolute color-shape-3" style="
+                                         z-index: -1;
+                                     ">
                                 </li>
                             </ul>
                             <!--animated shape end-->
