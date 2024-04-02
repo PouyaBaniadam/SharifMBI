@@ -38,7 +38,7 @@
                                     <ul class="support-article-list list-unstyled mt-4">
 
                                         {% for faq in faqs %}
-                                            <li class="py-4 border-top border-light">
+                                            <li class="py-4 mt-2 border-light bg-light p-5 rounded-custom">
                                                 <a href="{% url 'us:faq' faq.slug %}"
                                                    class="text-decoration-none d-block text-muted">
                                                     <h3 class="h5 support-article-title">{{ faq.question }}</h3>
