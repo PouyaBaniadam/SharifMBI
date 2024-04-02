@@ -31,7 +31,7 @@ admin.site.register(CustomUser, CustomUserAdmin)
 
 @admin.register(OTP)
 class OTPAdmin(admin.ModelAdmin):
-    list_display = ("username", "mobile_phone", "password", "sms_code", "otp_type")
+    list_display = ("username", "mobile_phone", "sms_code", "otp_type")
 
 
 @admin.register(Notification)

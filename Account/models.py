@@ -87,7 +87,7 @@ class OTP(models.Model):
 
     mobile_phone = models.CharField(max_length=11, verbose_name='شمارع تلفن')
 
-    password = models.CharField(max_length=100, verbose_name='رمز عبور')
+    password = models.CharField(max_length=100, verbose_name='رمز عبور', editable=False)
 
     full_name = models.CharField(max_length=100, verbose_name="نام و نام خانوادگی")
 
