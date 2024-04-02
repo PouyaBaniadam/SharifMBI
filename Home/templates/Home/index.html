@@ -38,12 +38,12 @@
                             <!--animated shape end-->
                             <div class="hero-img-wrap position-relative">
                                 <div class="hero-screen-wrap">
-                                    <div class="phone-screen">
-                                        <img src="{% static 'img/screen/phone-screen.png' %}" alt="hero image"
-                                             class="position-relative img-fluid">
-                                    </div>
+{#                                    <div class="phone-screen">#}
+{#                                        <img src="{% static 'img/screen/phone-screen.png' %}" alt="hero image"#}
+{#                                             class="position-relative img-fluid">#}
+{#                                    </div>#}
                                     <div class="mac-screen">
-                                        <img src="{% static 'img/screen/mac-screen.png' %}" alt="hero image"
+                                        <img src="{% static 'img/screen/desktop.jpg' %}" alt="hero image"
                                              class="position-relative img-fluid rounded-custom">
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@
                                         <i class="far fa-folder-tree fa-2x"></i>
                                     </div>
                                     <div class="icon-content">
-                                        <span class="text-primary h6">مرحله {{ forloop.counter }}</span>
+                                        <span class="text-primary h6">گام {{ forloop.counter }}</span>
                                         <h3 class="h5 mb-2">{{ modas_operandi.title }}</h3>
                                         <p>{{ modas_operandi.description }}</p>
                                     </div>
