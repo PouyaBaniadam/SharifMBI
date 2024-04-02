@@ -139,6 +139,8 @@ class Service(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام شرکت')
 
+    slug = models.SlugField(allow_unicode=True, max_length=100, unique=True, verbose_name='اسلاگ')
+
     link = models.URLField(blank=True, null=True, verbose_name='آدرس سایت')
 
     description = CKEditor5Field(config_name='extends', verbose_name='توضیحات')
@@ -146,8 +148,6 @@ class Customer(models.Model):
     icon = models.ImageField(upload_to="Us/Customer/icons", blank=True, null=True)
 
     image = models.ImageField(upload_to="Us/Customer/images", blank=True, null=True)
-
-    slug = models.SlugField(allow_unicode=True, max_length=100, unique=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -177,9 +177,9 @@ class ModasOperandi(models.Model):
 class Faq(models.Model):
     question = models.CharField(max_length=150, verbose_name='سوال')
 
-    answer = CKEditor5Field(config_name='extends', verbose_name='جواب')
+    slug = models.SlugField(allow_unicode=True, max_length=150, unique=True, verbose_name='اسلاگ')
 
-    slug = models.SlugField(allow_unicode=True, max_length=150)
+    answer = CKEditor5Field(config_name='extends', verbose_name='جواب')
 
     def __str__(self):
         return f"{self.question}"

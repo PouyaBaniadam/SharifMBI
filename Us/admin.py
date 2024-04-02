@@ -21,8 +21,9 @@ class AboutUsAdmin(admin.ModelAdmin):
 
 
 @admin.register(Customer)
-class ColleagueCompanyAdmin(admin.ModelAdmin):
+class CustomerCompanyAdmin(admin.ModelAdmin):
     list_display = ("name", "link")
+    prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(TeamMember)
