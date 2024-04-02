@@ -6,15 +6,16 @@ from Account.models import CustomUser
 
 
 class Message(models.Model):
-    user = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE, related_name='messages', blank=True, null=True)
+    user = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE, verbose_name="کاربر", related_name='messages',
+                             blank=True, null=True)
 
-    mobile_phone = models.CharField(max_length=11, blank=True, null=True)
+    mobile_phone = models.CharField(max_length=11, blank=True, null=True, verbose_name="شماره تلفن")
 
-    email = models.EmailField(max_length=254, blank=True, null=True)
+    email = models.EmailField(max_length=254, blank=True, null=True, verbose_name="آدرس ایمیل")
 
-    full_name = models.CharField(max_length=100, blank=True, null=True)
+    full_name = models.CharField(max_length=100, blank=True, null=True, verbose_name="نام و نام خانوادگی")
 
-    message = models.TextField()
+    message = models.TextField(verbose_name="متن")
 
     created_at = jDateTimeField(auto_now_add=True)
 
@@ -90,7 +91,7 @@ class AboutUs(models.Model):
 
     short_description = CKEditor5Field(config_name="extends", verbose_name="توضیح مختصر")
 
-    what_we_do = CKEditor5Field(config_name="extends", verbose_name="چی کار می‌کنیم")
+    what_we_do = CKEditor5Field(config_name="extends", verbose_name="چی کار می‌کنیم؟")
 
     def __str__(self):
         return f"{self.name}"
@@ -108,7 +109,7 @@ class TeamMember(models.Model):
 
     about = models.TextField(max_length=250, verbose_name='درباره')
 
-    image = models.ImageField(upload_to="Us/TeamMembers/images")
+    image = models.ImageField(upload_to="Us/TeamMembers/images", verbose_name="تصویر تیم")
 
     def __str__(self):
         return f"{self.name}"
@@ -145,9 +146,9 @@ class Customer(models.Model):
 
     description = CKEditor5Field(config_name='extends', verbose_name='توضیحات')
 
-    icon = models.ImageField(upload_to="Us/Customer/icons", blank=True, null=True)
+    icon = models.ImageField(upload_to="Us/Customer/icons", blank=True, null=True, verbose_name="آیکون")
 
-    image = models.ImageField(upload_to="Us/Customer/images", blank=True, null=True)
+    image = models.ImageField(upload_to="Us/Customer/images", blank=True, null=True, verbose_name="تصویر")
 
     def __str__(self):
         return f"{self.name}"
