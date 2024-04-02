@@ -109,7 +109,7 @@ class TeamMember(models.Model):
 
     about = models.TextField(max_length=250, verbose_name='درباره')
 
-    image = models.ImageField(upload_to="Us/TeamMembers/images", verbose_name="تصویر تیم")
+    image = models.ImageField(upload_to="Us/TeamMembers/images", verbose_name="تصویر عضو تیم")
 
     def __str__(self):
         return f"{self.name}"
