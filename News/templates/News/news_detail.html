@@ -40,17 +40,13 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="author-wrap text-center bg-light p-5 sticky-sidebar rounded-custom mt-5 mt-lg-0">
-                            {% if news.author.image %}
-                                <img src="{{ news.author.image.url }}" alt="author" width="80"
-                                     class="img-fluid shadow-sm rounded-circle">
-                            {% else %}
-                                <img src="{% static 'img/author.JPG' %}" alt="author" width="80"
-                                     class="img-fluid shadow-sm rounded-circle">
-                            {% endif %}
-                            <div class="author-info my-4">
-                                <h5 class="mb-0">{{ news.author.full_name }}</h5>
+                            <div class="blog-single-rating-post slider-parent-2">
+                                <h6 class="h5">این وبلاگ چقدر براتون مفید بود؟</h6>
+                                <br>
+                                <div>
+                                    {% ratings news %}
+                                </div>
                             </div>
-                            <p>{{ news.author.about }}</p>
                         </div>
                     </div>
                 </div>

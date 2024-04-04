@@ -24,7 +24,8 @@ from SharifMBI import settings
 urlpatterns = ([
                    path("", include("Home.urls")),
                    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
-                   path('ratings/', include('star_ratings.urls', namespace='ratings')),
+                   path('ratings/', include("star_ratings.urls", namespace="ratings")),
+                   path('hitcount/', include("hitcount.urls", namespace="hitcount")),
                    path("i18n/", include("django.conf.urls.i18n")),
                    path("account/", include("Account.urls")),
                    path("us/", include("Us.urls")),
