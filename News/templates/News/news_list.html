@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load filters %}
+{% load hitcount_tags %}
 {% load static %}
 
 {% block content %}
@@ -58,18 +59,8 @@
                                         <h2 class="h5 article-title limit-2-line-text">{{ news.title }}</h2>
                                     </a>
                                     <p class="limit-2-line-text">{{ news.content|safe|truncatechars:75 }}</p>
+                                    <p><i class="fas fa-eye"></i> {% get_hit_count for news %}</p>
                                     <div class="d-flex align-items-center pt-4">
-                                        {% if news.author.image %}
-                                            <div class="avatar">
-                                                <img src="{{ news.author.image }}" alt="avatar" width="40"
-                                                     class="img-fluid rounded-circle me-3">
-                                            </div>
-                                        {% else %}
-                                            <div class="avatar">
-                                                <img src="{% static 'img/author.JPG' %}" alt="avatar" width="40"
-                                                     class="img-fluid rounded-circle me-3">
-                                            </div>
-                                        {% endif %}
                                         <div class="avatar-info">
                                             <h6 class="mb-0 avatar-name">{{ news.author.full_name }}</h6>
                                             <span class="small fw-medium text-muted">{{ news.created_at|j_date_formatter }}</span>

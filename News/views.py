@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.utils.encoding import uri_to_iri
 from django.views.generic import ListView, DetailView
@@ -40,15 +41,19 @@ class NewsDetail(HitCountDetailView, DetailView):
         return queryset.select_related('category', 'author')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        try:
+            context = super().get_context_data(**kwargs)
 
-        related_news = self.object.get_related_news(max_results=3)
-        latest_news = self.object.get_latest_news()
+            related_news = self.object.get_related_news(max_results=3)
+            latest_news = self.object.get_latest_news()
 
-        context['related_news'] = related_news
-        context['latest_news'] = latest_news
+            context['related_news'] = related_news
+            context['latest_news'] = latest_news
 
-        return context
+            return context
+
+        except IntegrityError:
+            pass
 
     def get_object(self, queryset=None):
         slug = uri_to_iri(self.kwargs.get(self.slug_url_kwarg))
