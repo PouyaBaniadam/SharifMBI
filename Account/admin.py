@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from Account.models import CustomUser, OTP, Notification
+from Account.models import CustomUser, OTP, Notification, Newsletter
 
 
 class CustomUserAdmin(UserAdmin):
@@ -37,3 +37,8 @@ class OTPAdmin(admin.ModelAdmin):
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('uuid', 'title', 'created_at', 'mode', 'visibility', 'has_been_read')
+
+
+@admin.register(Newsletter)
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email', 'user')

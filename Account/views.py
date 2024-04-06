@@ -10,7 +10,7 @@ from django.views.generic import FormView
 
 from Account.forms import RegisterForm, CheckOTPForm, LogInForm, ForgetPasswordForm, ChangePasswordForm
 from Account.mixins import NonAuthenticatedUsersOnlyMixin
-from Account.models import CustomUser, OTP
+from Account.models import CustomUser, OTP, Newsletter
 from Home.sms import send_forget_password_sms
 
 
@@ -201,3 +201,32 @@ class CheckOTPView(FormView):
 
     def form_invalid(self, form):
         return super().form_invalid(form)
+
+
+class EnterNewsletters(View):
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get("email")
+        user = None
+
+        redirect_url = request.session.get('current_url')
+
+        if request.user.is_authenticated:
+            user = request.user
+
+        if Newsletter.objects.filter(email=email).exists():
+            messages.error(request, f"این آدرس ایمیل قبلا در خبرنامه ثبت شده است.")
+
+            if redirect_url is not None:
+                return redirect(redirect_url)
+
+            return redirect("home:home")
+
+        else:
+            Newsletter.objects.create(user=user, email=email)
+
+            messages.success(request, f"آدرس ایمیل شما با موفقیت در خبرنامه ثبت شد.")
+
+            if redirect_url is not None:
+                return redirect(redirect_url)
+
+            return redirect("home:home")

@@ -187,5 +187,5 @@ class Faq(models.Model):
 
     class Meta:
         db_table = 'us__faq'
-        verbose_name = 'سوال اخیر'
-        verbose_name_plural = 'سوالات اخیر'
+        verbose_name = 'سوال متداول'
+        verbose_name_plural = 'سوالات متداول'

@@ -170,3 +170,19 @@ class Notification(models.Model):
         db_table = 'account__notification'
         verbose_name = "اعلانیه"
         verbose_name_plural = "اعلانیه‌ها"
+
+
+class Newsletter(models.Model):
+    user = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE, blank=True, null=True)
+
+    email = models.EmailField(max_length=254, verbose_name="آدرس ایمیل", unique=True)
+
+    created_at = jDateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.email}"
+
+    class Meta:
+        db_table = 'account__newsletter'
+        verbose_name = "خبرنامه"
+        verbose_name_plural = "خبرنامه‌ها"
