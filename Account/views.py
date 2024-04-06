@@ -60,7 +60,12 @@ class LogInView(NonAuthenticatedUsersOnlyMixin, FormView):
 
             return self.form_invalid(form)
 
-        messages.success(request=request, message=f"{user.full_name} عزیز، خوش آمدید. ")
+        redirect_url = request.session.get('current_url')
+
+        if redirect_url is not None:
+            messages.success(request, f"{user.full_name} عزیز، خوش آمدید.")
+
+            return redirect(redirect_url)
 
         return redirect(reverse("home:home"))
 
@@ -71,25 +76,16 @@ class LogInView(NonAuthenticatedUsersOnlyMixin, FormView):
 
 class LogOutView(View):
     def get(self, request):
+        redirect_url = request.session.pop('current_url')
+
         logout(request=request)
-        next_url = request.GET.get("next")
 
-        if next_url is not None:
-            messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
-            return redirect(next_url)
+        messages.success(request, f"شما با موفقیت از حساب کاربری خود خارج شدید.")
 
-        else:
-            try:
-                messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
+        if redirect_url is not None:
+            return redirect(redirect_url)
 
-                home_url = reverse('home:home')
-
-                return redirect(home_url)
-
-            except:
-                messages.success(request=request, message=f"شما با موفقیت از حساب کاربری خود خارج شدید.")
-
-                return redirect(to="home:home")
+        return redirect(to="home:home")
 
 
 class ChangePasswordView(NonAuthenticatedUsersOnlyMixin, FormView):
@@ -113,7 +109,7 @@ class ChangePasswordView(NonAuthenticatedUsersOnlyMixin, FormView):
 
         otp.delete()
 
-        messages.success(request=request, message=f"رمز عبور با موفقیت تغییر یافت.")
+        messages.success(request=request, message=f"رمز عبور شما با موفقیت تغییر یافت.")
 
         return redirect(reverse('home:home'))
 
@@ -175,7 +171,12 @@ class CheckOTPView(FormView):
             otp = OTP.objects.get(uuid=uuid)
             otp.delete()
 
-            messages.success(request=request, message=f"{user.full_name} عزیز. حساب شما با موفقیت ساخته شد.")
+            redirect_url = request.session.get('current_url')
+
+            if redirect_url is not None:
+                messages.success(request=request, message=f"{user.full_name} عزیز. حساب شما با موفقیت ساخته شد.")
+
+                return redirect(redirect_url)
 
             return redirect(to="home:home")
 

@@ -8,10 +8,11 @@ from django.views.generic import FormView, View
 
 from Account.mixins import AuthenticatedUsersOnlyMixin
 from Diagnose.forms import DiagnoseForm
+from Home.mixins import URLStorageMixin
 from SharifMBI import settings
 
 
-class DiagnoseFormView(AuthenticatedUsersOnlyMixin, FormView):
+class DiagnoseFormView(URLStorageMixin, AuthenticatedUsersOnlyMixin, FormView):
     form_class = DiagnoseForm
     template_name = 'Diagnose/diagnose_form.html'
     success_url = '/'

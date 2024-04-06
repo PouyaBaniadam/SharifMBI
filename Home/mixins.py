@@ -1,11 +1,7 @@
-from django.shortcuts import redirect
-
-
-class StoreSlugMixin:
+class URLStorageMixin:
     def dispatch(self, request, *args, **kwargs):
-        store_slug = request.session.get('store_slug', None)
+        current_url = request.build_absolute_uri()
 
-        if not store_slug:
-            return redirect('home:intro')
+        request.session['current_url'] = current_url
 
         return super().dispatch(request, *args, **kwargs)

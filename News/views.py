@@ -4,10 +4,11 @@ from django.utils.encoding import uri_to_iri
 from django.views.generic import ListView, DetailView
 from hitcount.views import HitCountDetailView
 
+from Home.mixins import URLStorageMixin
 from News.models import News, Category
 
 
-class AllNews(ListView):
+class AllNews(URLStorageMixin, ListView):
     model = News
     context_object_name = 'news'
     template_name = 'News/news_list.html'
@@ -30,7 +31,7 @@ class AllNews(ListView):
         return context
 
 
-class NewsDetail(HitCountDetailView, DetailView):
+class NewsDetail(URLStorageMixin, HitCountDetailView, DetailView):
     model = News
     context_object_name = 'news'
     template_name = 'News/news_detail.html'
@@ -61,7 +62,7 @@ class NewsDetail(HitCountDetailView, DetailView):
         return get_object_or_404(queryset, **{self.slug_field: slug})
 
 
-class NewsByCategory(ListView):
+class NewsByCategory(URLStorageMixin, ListView):
     model = News
     context_object_name = 'news'
     template_name = 'News/news_by_category.html'

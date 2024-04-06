@@ -4,11 +4,12 @@ from django.utils.encoding import uri_to_iri
 from django.views.generic import TemplateView, FormView, ListView, DetailView
 
 from Account.models import CustomUser
+from Home.mixins import URLStorageMixin
 from Us.forms import ContactForm
 from Us.models import AboutUs, Customer, Faq
 
 
-class About(TemplateView):
+class About(URLStorageMixin, TemplateView):
     template_name = "Us/about.html"
 
     def get_context_data(self, **kwargs):
@@ -21,7 +22,7 @@ class About(TemplateView):
         return context
 
 
-class Contact(FormView):
+class Contact(URLStorageMixin, FormView):
     form_class = ContactForm
     template_name = "Us/contact.html"
     success_url = "/"
@@ -75,13 +76,13 @@ class Contact(FormView):
         return redirect("us:contact")
 
 
-class CustomerList(ListView):
+class CustomerList(URLStorageMixin, ListView):
     model = Customer
     context_object_name = "customers"
     template_name = "Us/customers.html"
 
 
-class CustomerDetail(DetailView):
+class CustomerDetail(URLStorageMixin, DetailView):
     model = Customer
     context_object_name = "customer"
     template_name = "Us/customer.html"
@@ -98,13 +99,13 @@ class CustomerDetail(DetailView):
         return context
 
 
-class FaqList(ListView):
+class FaqList(URLStorageMixin, ListView):
     model = Faq
     context_object_name = "faqs"
     template_name = "Us/faqs.html"
 
 
-class FaqDetail(DetailView):
+class FaqDetail(URLStorageMixin, DetailView):
     model = Faq
     context_object_name = "faq"
     template_name = "Us/faq.html"

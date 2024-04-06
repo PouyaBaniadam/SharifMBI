@@ -1,9 +1,10 @@
 from django.views.generic import TemplateView
 
+from Home.mixins import URLStorageMixin
 from Us.models import Customer, TeamMember, WhatDoCustomersEarn, ModasOperandi
 
 
-class HomeView(TemplateView):
+class HomeView(URLStorageMixin, TemplateView):
     template_name = 'Home/index.html'
 
     def get_context_data(self, **kwargs):
