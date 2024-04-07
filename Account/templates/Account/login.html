@@ -20,8 +20,8 @@
                                 {% csrf_token %}
 
                                 <div>
-                                    {% if form.none_field_errors %}
-                                        <p>{{ form.none_field_errors }}</p>
+                                    {% if form.non_field_errors %}
+                                        <p>{{ form.non_field_errors }}</p>
                                     {% endif %}
                                 </div>
 

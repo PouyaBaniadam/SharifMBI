@@ -11,7 +11,7 @@
                     <div class="footer-single-col">
                         <div class="footer-single-col mb-4">
                             <img src="{% static 'img/logo-white.png' %}" alt="logo" class="img-fluid logo-white">
-                            <img src="{% static 'img/logo-color.png' %}" alt="logo" class="img-fluid logo-color">
+                            <img width="80px" height="30px" src="{% static 'img/logo-dark.jpg' %}" alt="logo" class="img-fluid logo-color">
                         </div>
                         <p>آخرین اخبار، مقالات و منابع را در صندوق پستی شما هفتگی ارسال خواهیم کرد</p>
 
@@ -44,7 +44,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 mt-4 mt-md-0 mt-lg-0">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d809.9515298546016!2d51.3488396!3d35.7063884!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00a98a1ad941%3A0x14d5da317115e0a8!2z2YXYsdqp2LIg2KLZhdmI2LLYtCDZhdmH2KfYsdiqINmH2KfbjCDZvtuM2LTYsdmB2KrZhyDYtdmG2LnYqtuMINi02LHbjNmB!5e0!3m2!1sen!2s!4v1712481299525!5m2!1sen!2s" height="450" width="390"  style="border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d809.9515298546016!2d51.3488396!3d35.7063884!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00a98a1ad941%3A0x14d5da317115e0a8!2z2YXYsdqp2LIg2KLZhdmI2LLYtCDZhdmH2KfYsdiqINmH2KfbjCDZvtuM2LTYsdmB2KrZhyDYtdmG2LnYqtuMINi02LHbjNmB!5e0!3m2!1sen!2s!4v1712481299525!5m2!1sen!2s"
+                                    height="390" width="390" style="border-radius:10px;" allowfullscreen=""
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -62,11 +64,36 @@
                 <div class="col-md-4 col-lg-4">
                     <div class="footer-single-col text-start text-lg-end text-md-end">
                         <ul class="list-unstyled list-inline footer-social-list mb-0">
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-github"></i></a></li>
-                            <li class="list-inline-item"><a href="#"> <img src="assets/img/eitaa-ic.svg" height="18px" width="18px" alt="" style="padding-bottom: 5px;"></a></li>
+                            {% if social_media.whats_App_icon %}
+                                <li class="list-inline-item">
+                                    <a href="{{ social_media.whats_App_url }}"> <img
+                                            src="{{ social_media.whats_App_icon.url }}" height="18px" width="18px"
+                                            alt=""
+                                            style="padding-bottom: 5px;">
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% if social_media.telegram_icon %}
+                                <li class="list-inline-item">
+                                    <a href="{{ social_media.telegram_url }}"> <img
+                                            src="{{ social_media.telegram_icon.url }}" height="18px" width="18px"
+                                            alt=""
+                                            style="padding-bottom: 5px;">
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% if social_media.email_icon %}
+                                <li class="list-inline-item">
+                                    <a href="{{ social_media.email_url }}"> <img
+                                            src="{{ social_media.email_icon.url }}" height="18px" width="18px"
+                                            alt=""
+                                            style="padding-bottom: 5px;">
+                                    </a>
+                                </li>
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>

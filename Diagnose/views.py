@@ -32,7 +32,7 @@ class DiagnoseFormView(URLStorageMixin, AuthenticatedUsersOnlyMixin, FormView):
 
 class DownloadFileView(View):
     def get(self, request, *args, **kwargs):
-        file_path = 'assets/files/test.pdf'
+        file_path = 'assets/files/form.pdf'
 
         absolute_file_path = os.path.join(settings.BASE_DIR, file_path)
 

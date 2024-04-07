@@ -43,6 +43,11 @@ class SocialMedia(models.Model):
     telegram_icon = models.ImageField(upload_to="Us/SocialMedia/icons", blank=True, null=True,
                                       verbose_name='آیکون تلگرام')
 
+    email_url = models.EmailField(blank=True, null=True, verbose_name='آدرس ایمیل')
+
+    email_icon = models.ImageField(upload_to="Us/SocialMedia/icons", blank=True, null=True,
+                                   verbose_name='آیکون ایمیل')
+
     telegram_number = models.CharField(max_length=13, blank=True, null=True, verbose_name='شماره تلگرام')
 
     whats_App_url = models.URLField(blank=True, null=True, verbose_name='لینک واتس‌اپ')

@@ -6,7 +6,8 @@
         <div class="container d-flex align-items-center justify-content-lg-between position-relative">
             <a href="{% url 'home:home' %}" class="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
                 <img src="{% static 'img/logo-white.png' %}" alt="logo" class="img-fluid logo-white">
-                <img src="{% static 'img/logo-color.png' %}" alt="logo" class="img-fluid logo-color">
+                <img width="80px" height="30px" src="{% static 'img/logo-dark.jpg' %}" alt="logo"
+                     class="img-fluid logo-color">
             </a>
 
             <a class="navbar-toggler position-absolute right-0 border-0" href="#offcanvasWithBackdrop"
@@ -31,6 +32,12 @@
                 <div class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
                     <a href="{% url 'account:logout' %}" class="btn btn-danger">خروج از حساب کاربری</a>
                 </div>
+                {% if request.user.is_superuser %}
+                    <div style="margin-right: 10px"
+                         class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
+                        <a target="_blank" href="{% url 'admin:index' %}" class="btn btn-success">پنل ادمین</a>
+                    </div>
+                {% endif %}
             {% else %}
                 <div class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
                     <a href="{% url 'account:login' %}" class="btn btn-primary">ورود</a>
@@ -41,8 +48,9 @@
             <!--offcanvas menu start-->
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop">
                 <div class="offcanvas-header d-flex align-items-center mt-4">
-                    <a href="#" class="d-flex align-items-center mb-md-0 text-decoration-none">
-                        <img src="{% static 'img/logo-color.png' %}" alt="logo" class="img-fluid ps-2">
+                    <a href="{% url 'home:home' %}" class="d-flex align-items-center mb-md-0 text-decoration-none">
+                        <img width="80px" height="30px" src="{% static 'img/logo-dark.jpg' %}" alt="logo"
+                             class="img-fluid ps-2">
                     </a>
                     <button type="button" class="close-btn text-danger" data-bs-dismiss="offcanvas"
                             aria-label="Close"><i class="far fa-close"></i></button>
@@ -64,6 +72,11 @@
                             <a href="{% url 'account:logout' %}" class="btn btn-outline-danger me-2">خروج از حساب
                                 کاربری</a>
                         </div>
+                        {% if request.user.is_superuser %}
+                            <div style="margin-right: 10px" class="action-btns mt-4 pe-3">
+                                <a target="_blank" href="{% url 'admin:index' %}" class="btn btn-outline-success me-2">پنل ادمین</a>
+                            </div>
+                        {% endif %}
                     {% else %}
                         <div class="action-btns mt-4 pe-3">
                             <a href="{% url 'account:login' %}" class="btn btn-outline-primary me-2">ورود</a>
