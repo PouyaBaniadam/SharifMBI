@@ -12,7 +12,7 @@ from Home.mixins import URLStorageMixin
 from SharifMBI import settings
 
 
-class DiagnoseFormView(URLStorageMixin, AuthenticatedUsersOnlyMixin, FormView):
+class DiagnoseFormView(AuthenticatedUsersOnlyMixin, URLStorageMixin, FormView):
     form_class = DiagnoseForm
     template_name = 'Diagnose/diagnose_form.html'
     success_url = '/'

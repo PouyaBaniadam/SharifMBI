@@ -13,10 +13,13 @@ class NonAuthenticatedUsersOnlyMixin:
 class AuthenticatedUsersOnlyMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            referring_url = request.META.get('HTTP_REFERER', None)
-            request.session['referring_url'] = referring_url
+            messages.error(request, "ابتدار وارد حساب کاربری خود شوید.")
 
-            messages.error(request, "این بخش فقط مخصوص کاربران ثبت نام شده است.")
+            redirect_url = request.session.get('current_url')
+
+            if redirect_url is not None:
+                return redirect(redirect_url)
+
             return redirect("home:home")
 
         return super(AuthenticatedUsersOnlyMixin, self).dispatch(request, *args, **kwargs)
